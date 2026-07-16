@@ -242,7 +242,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 <!-- Contenedor del Preview / Iframe -->
                 <div class="product-image-container" style="height: 180px; background-color: #f7f7f7; overflow: hidden; position: relative; flex-shrink: 0; cursor: pointer;">
-                    <img class="portfolio-img" src="${imageStr}" alt="${nameStr}" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; transition: opacity 0.3s; display: block;">
+                    <img class="portfolio-img" src="${imageStr}" alt="${nameStr}" loading="lazy" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80';" style="width: 100%; height: 100%; object-fit: cover; transition: opacity 0.3s; display: block;">
                     <iframe class="portfolio-iframe" data-src="${linkStr}" style="display: none; width: 100%; height: 100%; border: none; position: absolute; top: 0; left: 0; z-index: 1;"></iframe>
                 </div>
 
@@ -414,6 +414,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 filtrados = baseCatalogo;
             } else {
                 filtrados = baseCatalogo.filter(p => p.category === category);
+                if (category === 'PROMOCIONES') {
+                    filtrados.sort((a, b) => {
+                        if (a.id === 'site_aye') return -1;
+                        if (b.id === 'site_aye') return 1;
+                        return 0;
+                    });
+                }
             }
             setProducts(filtrados);
 
