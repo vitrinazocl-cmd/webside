@@ -52,6 +52,19 @@ document.addEventListener('DOMContentLoaded', () => {
         slide.style.width = `${100 / numSlides}%`;
     });
 
+    // Optimiza carga del slider: primera imagen prioritaria, resto diferido.
+    const slideImages = track.querySelectorAll('.slide img');
+    slideImages.forEach((img, index) => {
+        img.decoding = 'async';
+        if (index === 0) {
+            img.loading = 'eager';
+            img.fetchPriority = 'high';
+        } else {
+            img.loading = 'lazy';
+            img.fetchPriority = 'low';
+        }
+    });
+
     function updateSlider() {
         const slideWidth = 100 / numSlides;
         track.style.transform = `translateX(-${currentIndex * slideWidth}%)`;
@@ -243,7 +256,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <!-- Contenedor del Preview / Iframe -->
                 <div class="product-image-container" style="height: 180px; background-color: #f7f7f7; overflow: hidden; position: relative; flex-shrink: 0; cursor: pointer;">
                     <img class="portfolio-img" src="${imageStr}" alt="${nameStr}" loading="lazy" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80';" style="width: 100%; height: 100%; object-fit: cover; transition: opacity 0.3s; display: block;">
-                    <iframe class="portfolio-iframe" data-src="${linkStr}" style="display: none; width: 100%; height: 100%; border: none; position: absolute; top: 0; left: 0; z-index: 1;"></iframe>
+                    <iframe class="portfolio-iframe" data-src="${linkStr}" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" sandbox="allow-scripts allow-same-origin allow-forms allow-popups" style="display: none; width: 100%; height: 100%; border: none; position: absolute; top: 0; left: 0; z-index: 1;"></iframe>
                 </div>
 
                 <!-- Info del Proyecto -->
@@ -259,7 +272,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <button class="preview-btn" data-link="${linkStr}" data-name="${nameStr}" style="flex: 1; background: #333; color: white; border: none; border-radius: 4px; padding: 10px 5px; font-size: 12px; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 5px; transition: background 0.2s;">
                             <i class="fa-solid fa-laptop-code"></i> Previsualizar
                         </button>
-                        <a href="${linkStr}" target="_blank" class="add-to-cart-btn fb-blue-btn" style="flex: 1; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 5px; font-weight: bold; text-align: center; border-radius: 4px; padding: 10px 5px; font-size: 12px; box-sizing: border-box; background-color: #0071ce;">
+                        <a href="${linkStr}" target="_blank" rel="noopener noreferrer" class="add-to-cart-btn fb-blue-btn" style="flex: 1; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 5px; font-weight: bold; text-align: center; border-radius: 4px; padding: 10px 5px; font-size: 12px; box-sizing: border-box; background-color: #0071ce;">
                             <i class="fa-solid fa-arrow-up-right-from-square"></i> Visitar
                         </a>
                     </div>

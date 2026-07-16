@@ -12,7 +12,7 @@ const catalogoProductos = [
         "name": "Sitios Web",
         "category": "SERVICIOS",
         "image": "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?auto=format&fit=crop&w=1200&q=80",
-        "link": "http://www.eleodoroelgrande.cl",
+        "link": "https://www.eleodoroelgrande.cl",
         "description": "Diseno y desarrollo de sitios web modernos, optimizados para velocidad, SEO y conversion en moviles y escritorio."
     },
     {

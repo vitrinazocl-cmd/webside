@@ -16,6 +16,8 @@ const ordenesPendientes = new Map();
 const app = express();
 const PORT = process.env.PORT || 3000;
 const DATABASE_URL = process.env.DATABASE_URL;
+app.disable('x-powered-by');
+app.set('trust proxy', 1);
 let pool = DATABASE_URL
     ? new Pool({
         connectionString: DATABASE_URL,
@@ -31,6 +33,13 @@ function isDbEnabled() {
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use((req, res, next) => {
+    res.setHeader('X-Content-Type-Options', 'nosniff');
+    res.setHeader('X-Frame-Options', 'SAMEORIGIN');
+    res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
+    res.setHeader('Permissions-Policy', 'geolocation=(), camera=(), microphone=()');
+    next();
+});
 
 // Helper para obtener cookies del request
 function getCookie(req, name) {
@@ -359,8 +368,13 @@ app.post('/api/login', (req, res) => {
     const adminPass = process.env.ADMIN_PASS || '12345';
 
     if (user === adminUser && pass === adminPass) {
+        const isSecure = req.secure || req.get('x-forwarded-proto') === 'https';
         res.cookie('admin_session', 'combate_authenticated_token', {
-            maxAge: 24 * 60 * 60 * 1000 // 1 día
+            maxAge: 24 * 60 * 60 * 1000, // 1 día
+            httpOnly: true,
+            sameSite: 'lax',
+            secure: isSecure,
+            path: '/'
         });
         return res.json({ success: true });
     } else {

@@ -1,1 +1,16 @@
+/transbank_config.json  /404  404
+/ventas.json  /404  404
+/server.js  /404  404
+/evidencia_integracion.html  /404  404
+/test_webpay.js  /404  404
+/test_whatsapp.js  /404  404
+/build_catalog.ps1  /404  404
+/buscar_fotos_reales.ps1  /404  404
+/ESTAMPAR_FOTOS.ps1  /404  404
+/optimize_images.ps1  /404  404
+
+http://webprochile.cl/*  https://webprochile.cl/:splat  301!
+http://www.webprochile.cl/*  https://webprochile.cl/:splat  301!
+https://www.webprochile.cl/*  https://webprochile.cl/:splat  301!
+
 /api/*  https://distribuidoraaye-2.onrender.com/api/:splat  200
