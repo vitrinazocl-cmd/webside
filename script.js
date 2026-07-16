@@ -107,9 +107,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Start auto slide
     startAutoPlay();
     
-    // Pause on hover
-    track.parentElement.addEventListener('mouseenter', stopAutoPlay);
-    track.parentElement.addEventListener('mouseleave', startAutoPlay);
+    // Pause on hover disabled for guaranteed continuous autoplay
+    // track.parentElement.addEventListener('mouseenter', stopAutoPlay);
+    // track.parentElement.addEventListener('mouseleave', startAutoPlay);
 });
 
 // Global function for branch selection
