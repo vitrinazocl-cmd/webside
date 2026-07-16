@@ -1,0 +1,19 @@
+{
+  "name": "distribuidora2-backend",
+  "version": "1.0.0",
+  "description": "Backend para procesamiento de Webpay y ventas con PostgreSQL",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "dependencies": {
+    "axios": "^1.7.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "pg": "^8.13.1",
+    "transbank-sdk": "^4.0.0",
+    "xlsx": "^0.18.5"
+  }
+}

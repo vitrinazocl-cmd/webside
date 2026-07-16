@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WEB PRO CHILE</title>
+    <link rel="stylesheet" href="style.css?v=999">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+
+
+    <!-- Branch Selection Overlay (Home) -->
+    <div id="branch-selector" class="branch-selector-overlay" style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; width: 100vw; position: fixed; top: 0; left: 0; z-index: 9999; background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('WhatsApp%20Image%202026-07-16%20at%2016.42.55.jpeg'); background-size: contain; background-position: center; background-repeat: no-repeat; background-color: #000; overflow-y: auto; padding: 40px 20px; box-sizing: border-box; gap: 35px;">
+        
+        <!-- Visitas y Mensaje de Despacho -->
+        <div class="home-selection" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; margin: 0; padding: 0; text-shadow: 0 2px 8px rgba(0,0,0,0.9);">
+            <div class="visitor-counter-container" style="display: flex; align-items: center; justify-content: center; gap: 10px; margin: 0;">
+                <div>
+                    <p class="counter-title" style="margin: 0 0 10px 0; font-size: 1.15rem; color: #fff; font-weight: bold; text-align: center; text-transform: uppercase; letter-spacing: 2px;">VISITAS</p>
+                    <div class="flip-counter" id="visitor-flip-counter" style="filter: invert(1) hue-rotate(180deg);">
+                        <!-- Digits injected by JS -->
+                    </div>
+                </div>
+            </div>
+
+            <div style="text-align: center; color: #fff; margin-top: 10px; font-family: 'Roboto', sans-serif;">
+                <p style="margin: 2px 0; font-size: 1.25rem; font-weight: bold;"><i class="fa-solid fa-truck-fast" style="color: #ffcc00;"></i> Despachos a domicilio rápidos y seguros</p>
+            </div>
+        </div>
+
+        <!-- Botón de Entrada -->
+        <button class="branch-btn enter-btn" onclick="selectBranch('Principal')" style="padding: 18px 50px; font-size: 1.5rem; background: linear-gradient(135deg, #0071ce, #005bb5); color: white; border: 2px solid white; border-radius: 50px; box-shadow: 0 8px 25px rgba(0,0,0,0.7); text-transform: uppercase; font-weight: 900; letter-spacing: 2px; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; gap: 15px; width: 100%; max-width: 380px;">
+            <span>ENTRAR AL MENÚ</span>
+            <i class="fa-solid fa-arrow-right"></i>
+        </button>
+        
+        <!-- Redes Sociales -->
+        <div class="home-social-links" style="margin: 0; width: 100%;">
+            <div class="social-icons" style="gap: 20px; justify-content: center; display: flex;">
+                <a href="https://www.facebook.com/share/1BeJ1Suo89/?mibextid=wwXIfr" target="_blank" class="social-facebook" style="background: rgba(255,255,255,0.9); width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; border-radius: 50%; box-shadow: 0 4px 15px rgba(0,0,0,0.4);"><i class="fa-brands fa-facebook-f" style="color: #1877f2; font-size: 1.3rem;"></i></a>
+                <a href="https://www.instagram.com/comercializadora_aye?igsh=MXBhY2Zvb21mNzhvbA==" target="_blank" class="social-instagram" style="background: rgba(255,255,255,0.9); width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; border-radius: 50%; box-shadow: 0 4px 15px rgba(0,0,0,0.4);"><i class="fa-brands fa-instagram" style="color: #e1306c; font-size: 1.3rem;"></i></a>
+                <a href="https://wa.me/56989784973" target="_blank" class="social-whatsapp" style="background: rgba(255,255,255,0.9); width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; border-radius: 50%; box-shadow: 0 4px 15px rgba(0,0,0,0.4);"><i class="fa-brands fa-whatsapp" style="color: #25d366; font-size: 1.3rem;"></i></a>
+                <a href="https://www.tiktok.com/@comercializadoraae?_r=1&_t=ZS-97KJFagmMJs" target="_blank" class="social-tiktok" style="background: rgba(255,255,255,0.9); width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; border-radius: 50%; box-shadow: 0 4px 15px rgba(0,0,0,0.4);"><i class="fa-brands fa-tiktok" style="color: #000000; font-size: 1.3rem;"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <header class="top-header">
+        <div class="container header-container">
+            <div class="logo" style="display: flex; align-items: center; gap: 15px;">
+                <img src="WhatsApp%20Image%202026-07-16%20at%2016.42.55.jpeg" alt="WEB PRO CHILE" style="max-height: 80px; transition: transform 0.3s; border-radius: 8px;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+                <span style="font-family: 'Roboto', sans-serif; font-weight: 900; font-size: 2.1rem; letter-spacing: 1px; text-shadow: -1px -1px 0 #333, 1px -1px 0 #333, -1px 1px 0 #333, 1px 1px 0 #333, 2px 2px 3px rgba(0,0,0,0.45);">
+                    <span style="color: #ffffff;">WEB PRO </span>
+                    <span style="color: #005cff;">C</span>
+                    <span style="color: #ffffff;">H</span>
+                    <span style="color: #ffffff;">I</span>
+                    <span style="color: #ff3b30;">L</span>
+                    <span style="color: #ff3b30;">E</span>
+                </span>
+            </div>
+            
+            <div class="calendar-btn" id="open-cart-btn" style="cursor: pointer;">
+                <i class="fa-solid fa-cart-arrow-down"></i>
+                <span>Arma tu pedido</span>
+            </div>
+
+            <div class="search-bar">
+                <input type="text" id="search-input" placeholder="¿Qué producto buscas?...">
+                <button id="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+            </div>
+
+            <div class="user-actions">
+                <div class="cart" id="cart-icon-btn" style="cursor: pointer;">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span class="cart-count" id="cart-count">0</span>
+                    <span>Carro Compras</span>
+                </div>
+                <a href="#" id="admin-login-btn" class="user-profile" title="Ver Pedidos Pendientes" style="color: var(--primary-color); text-decoration: none; display: flex; align-items: center; gap: 5px;">
+                    <i class="fa-solid fa-clipboard-list"></i>
+                    <span style="font-size: 12px; font-weight: bold;">Pedidos</span>
+                </a>
+                <a href="#" id="ventas-login-btn" class="user-profile" title="Ver Historial de Ventas" style="color: #4CAF50; text-decoration: none; display: flex; align-items: center; gap: 5px; margin-left: 10px;">
+                    <i class="fa-solid fa-chart-line"></i>
+                    <span style="font-size: 12px; font-weight: bold;">Ventas</span>
+                </a>
+                <div class="user-profile" style="color: var(--primary-color);">
+                    <i class="fa-regular fa-user"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <nav class="main-nav">
+        <div class="container nav-container">
+            <a href="#productos" class="active" data-category="PROMOCIONES" style="color: #ffcc00; font-weight: bold;"><i class="fa-solid fa-star"></i> PROMOCIONES</a>
+            <a href="#productos" data-category="TODOS"><i class="fa-solid fa-store"></i> CATALOGO</a>
+            <a href="#productos" data-category="SERVICIOS"><i class="fa-solid fa-gears"></i> SERVICIOS</a>
+            <a href="#" id="open-comunidad-btn" style="color: #ff9800; font-weight: bold;"><i class="fa-solid fa-users"></i> COMUNIDAD</a>
+            <a href="#" id="open-contact-btn" style="color: #e74c3c; font-weight: bold;"><i class="fa-solid fa-address-book"></i> CONTACTO</a>
+            <a href="#" id="open-soporte-btn" style="color: #00d2fc; font-weight: bold;"><i class="fa-solid fa-headset"></i> SOPORTE</a>
+        </div>
+    </nav>
+
+    <!-- Banner de Despachos -->
+    <div class="delivery-banner" style="background: #111; color: white; border-bottom: 2px solid #ffcc00; font-family: 'Roboto', sans-serif; display: flex; align-items: center; font-size: 0.9rem;">
+        <div style="background: #0071ce; color: #fff; padding: 8px 15px; font-weight: 900; z-index: 10; text-transform: uppercase; border-right: 2px solid #ffcc00; display: flex; align-items: center; gap: 8px; font-size: 0.9rem;">
+            <i class="fa-solid fa-truck-fast" style="color: #ffcc00;"></i> DESPACHOS
+        </div>
+        <marquee scrollamount="7" style="flex: 1; padding: 8px 10px; color: #ddd;">
+            <span style="margin-right: 50px;"><i class="fa-solid fa-calendar-days" style="color:#ffcc00;"></i> <strong>TODOS LOS DÍAS:</strong> Pudahuel, C. Navia, Lo Prado, Q. Normal, Maipú <strong style="color:#28a745; background: rgba(40,167,69,0.2); padding: 2px 6px; border-radius: 4px;">$3.000</strong> (Min $70.000)</span>
+            <span style="margin-right: 50px;"><i class="fa-solid fa-calendar-week" style="color:#ffcc00;"></i> <strong>LUN, MIÉ Y VIE:</strong> Quilicura, Independencia, Recoleta, Cerrillos, Renca, Est. Central <strong style="color:#28a745; background: rgba(40,167,69,0.2); padding: 2px 6px; border-radius: 4px;">$4.000</strong> (Min $70.000)</span>
+            <span style="margin-right: 50px;"><i class="fa-regular fa-clock" style="color:#ffcc00;"></i> <strong>HORARIO:</strong> 10:00 a 17:00 hrs</span>
+            <span style="color: #ffcc00; font-weight: 900; text-transform: uppercase;"><i class="fa-solid fa-gift"></i> ¡Compras sobre $250.000 Despacho Gratis! <i class="fa-solid fa-gift"></i></span>
+        </marquee>
+    </div>
+
+    <main class="main-content container">
+        
+        <aside class="ad-box left-ad" style="position: relative; background-color: #111;">
+            <img src="WhatsApp%20Image%202026-07-16%20at%2016.42.55.jpeg" alt="Logo Lateral Izquierdo" style="width: 100%; height: 100%; object-fit: contain; display: block;">
+            <!-- QR WhatsApp en la esquina superior izquierda -->
+            <a href="#" target="_blank" title="Unirte al grupo de WhatsApp" style="position: absolute; top: 10px; left: 10px; width: 65px; height: 65px; border-radius: 8px; border: 3px solid #25D366; box-shadow: 0 0 8px rgba(37,211,102,0.6); overflow: hidden; background: white; transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="QR WhatsApp" style="width: 100%; height: 100%; object-fit: contain; padding: 5px;">
+            </a>
+        </aside>
+
+        <section class="slider-section">
+            <div class="slider-container">
+                <div class="slider-track" id="sliderTrack">
+                    <!-- Slide 1: Distribuidora A&E -->
+                    <div class="slide" style="position: relative; display: flex; align-items: center; justify-content: center; width: 100%; height: 100%;">
+                        <img src="imagen1.png" alt="Distribuidora A&E" style="width: 100%; height: 100%; object-fit: cover; filter: brightness(0.45);">
+                        <div class="slide-content" style="position: absolute; color: white; text-align: left; left: 8%; max-width: 75%; z-index: 10; font-family: 'Roboto', sans-serif;">
+                            <div style="background: #0071ce; display: inline-block; padding: 4px 10px; border-radius: 4px; font-weight: bold; margin-bottom: 10px; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px;">PROYECTO DESTACADO</div>
+                            <h2 style="font-size: 2.2rem; font-weight: 900; margin: 0 0 10px 0; color: #ffcc00; line-height: 1.2;">Distribuidora A&E</h2>
+                            <p style="font-size: 1.05rem; margin: 0 0 20px 0; color: #eee; line-height: 1.4; max-width: 550px;">Plataforma e-commerce completa con carro de compras interactivo, Webpay e integración automatizada con WhatsApp.</p>
+                            <div style="display: flex; gap: 10px;">
+                                <button class="checkout-btn slide-preview-btn" data-link="https://www.distribuidoraaye.cl/" data-name="Distribuidora A&E" style="padding: 10px 20px; font-size: 0.9rem; font-weight: bold; cursor: pointer; border: none; border-radius: 4px; display: flex; align-items: center; gap: 8px; background-color: #333; color: white;"><i class="fa-solid fa-laptop-code"></i> Previsualizar</button>
+                                <a href="https://www.distribuidoraaye.cl/" target="_blank" class="checkout-btn" style="padding: 10px 20px; font-size: 0.9rem; font-weight: bold; border-radius: 4px; text-decoration: none; background: #28a745; color: white; border: none; display: flex; align-items: center; gap: 8px;"><i class="fa-solid fa-arrow-up-right-from-square"></i> Visitar Sitio</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Slide 2: Eleodoro el Grande -->
+                    <div class="slide" style="position: relative; display: flex; align-items: center; justify-content: center; width: 100%; height: 100%;">
+                        <img src="imagen2.jpeg" alt="Eleodoro el Grande" style="width: 100%; height: 100%; object-fit: cover; filter: brightness(0.45);">
+                        <div class="slide-content" style="position: absolute; color: white; text-align: left; left: 8%; max-width: 75%; z-index: 10; font-family: 'Roboto', sans-serif;">
+                            <div style="background: #0071ce; display: inline-block; padding: 4px 10px; border-radius: 4px; font-weight: bold; margin-bottom: 10px; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px;">SITIO CORPORATIVO</div>
+                            <h2 style="font-size: 2.2rem; font-weight: 900; margin: 0 0 10px 0; color: #ffcc00; line-height: 1.2;">Eleodoro el Grande</h2>
+                            <p style="font-size: 1.05rem; margin: 0 0 20px 0; color: #eee; line-height: 1.4; max-width: 550px;">Portal web profesional diseñado para la cotización y contratación de servicios especializados en línea.</p>
+                            <div style="display: flex; gap: 10px;">
+                                <button class="checkout-btn slide-preview-btn" data-link="http://www.eleodoroelgrande.cl" data-name="Eleodoro el Grande" style="padding: 10px 20px; font-size: 0.9rem; font-weight: bold; cursor: pointer; border: none; border-radius: 4px; display: flex; align-items: center; gap: 8px; background-color: #333; color: white;"><i class="fa-solid fa-laptop-code"></i> Previsualizar</button>
+                                <a href="http://www.eleodoroelgrande.cl" target="_blank" class="checkout-btn" style="padding: 10px 20px; font-size: 0.9rem; font-weight: bold; border-radius: 4px; text-decoration: none; background: #28a745; color: white; border: none; display: flex; align-items: center; gap: 8px;"><i class="fa-solid fa-arrow-up-right-from-square"></i> Visitar Sitio</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Slide 3: Disfrazate -->
+                    <div class="slide" style="position: relative; display: flex; align-items: center; justify-content: center; width: 100%; height: 100%;">
+                        <img src="imagen3.jpeg" alt="Disfrázate" style="width: 100%; height: 100%; object-fit: cover; filter: brightness(0.45);">
+                        <div class="slide-content" style="position: absolute; color: white; text-align: left; left: 8%; max-width: 75%; z-index: 10; font-family: 'Roboto', sans-serif;">
+                            <div style="background: #0071ce; display: inline-block; padding: 4px 10px; border-radius: 4px; font-weight: bold; margin-bottom: 10px; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px;">TIENDA & CATÁLOGO</div>
+                            <h2 style="font-size: 2.2rem; font-weight: 900; margin: 0 0 10px 0; color: #ffcc00; line-height: 1.2;">Disfrázate - Venta y Arriendo</h2>
+                            <p style="font-size: 1.05rem; margin: 0 0 20px 0; color: #eee; line-height: 1.4; max-width: 550px;">Catálogo web responsivo y dinámico para arriendo de disfraces con derivación optimizada a WhatsApp.</p>
+                            <div style="display: flex; gap: 10px;">
+                                <button class="checkout-btn slide-preview-btn" data-link="http://www.disfrazate.cl" data-name="Disfrázate" style="padding: 10px 20px; font-size: 0.9rem; font-weight: bold; cursor: pointer; border: none; border-radius: 4px; display: flex; align-items: center; gap: 8px; background-color: #333; color: white;"><i class="fa-solid fa-laptop-code"></i> Previsualizar</button>
+                                <a href="http://www.disfrazate.cl" target="_blank" class="checkout-btn" style="padding: 10px 20px; font-size: 0.9rem; font-weight: bold; border-radius: 4px; text-decoration: none; background: #28a745; color: white; border: none; display: flex; align-items: center; gap: 8px;"><i class="fa-solid fa-arrow-up-right-from-square"></i> Visitar Sitio</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Slide 4: Educhile -->
+                    <div class="slide" style="position: relative; display: flex; align-items: center; justify-content: center; width: 100%; height: 100%;">
+                        <img src="imagen4.jpeg" alt="Educhile" style="width: 100%; height: 100%; object-fit: cover; filter: brightness(0.45);">
+                        <div class="slide-content" style="position: absolute; color: white; text-align: left; left: 8%; max-width: 75%; z-index: 10; font-family: 'Roboto', sans-serif;">
+                            <div style="background: #0071ce; display: inline-block; padding: 4px 10px; border-radius: 4px; font-weight: bold; margin-bottom: 10px; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px;">PLATAFORMA EDUCATIVA</div>
+                            <h2 style="font-size: 2.2rem; font-weight: 900; margin: 0 0 10px 0; color: #ffcc00; line-height: 1.2;">Educhile</h2>
+                            <p style="font-size: 1.05rem; margin: 0 0 20px 0; color: #eee; line-height: 1.4; max-width: 550px;">Portal de educación virtual enfocado en el aprendizaje y el seguimiento de cursos en línea en tiempo real.</p>
+                            <div style="display: flex; gap: 10px;">
+                                <button class="checkout-btn slide-preview-btn" data-link="https://educhile.onrender.com/" data-name="Educhile" style="padding: 10px 20px; font-size: 0.9rem; font-weight: bold; cursor: pointer; border: none; border-radius: 4px; display: flex; align-items: center; gap: 8px; background-color: #333; color: white;"><i class="fa-solid fa-laptop-code"></i> Previsualizar</button>
+                                <a href="https://educhile.onrender.com/" target="_blank" class="checkout-btn" style="padding: 10px 20px; font-size: 0.9rem; font-weight: bold; border-radius: 4px; text-decoration: none; background: #28a745; color: white; border: none; display: flex; align-items: center; gap: 8px;"><i class="fa-solid fa-arrow-up-right-from-square"></i> Visitar Sitio</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Slide 5: Caja A&E -->
+                    <div class="slide" style="position: relative; display: flex; align-items: center; justify-content: center; width: 100%; height: 100%;">
+                        <img src="imagen5.jpeg" alt="Caja A&E" style="width: 100%; height: 100%; object-fit: cover; filter: brightness(0.45);">
+                        <div class="slide-content" style="position: absolute; color: white; text-align: left; left: 8%; max-width: 75%; z-index: 10; font-family: 'Roboto', sans-serif;">
+                            <div style="background: #0071ce; display: inline-block; padding: 4px 10px; border-radius: 4px; font-weight: bold; margin-bottom: 10px; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px;">SISTEMA WEB FINANCIERO</div>
+                            <h2 style="font-size: 2.2rem; font-weight: 900; margin: 0 0 10px 0; color: #ffcc00; line-height: 1.2;">Caja A&E</h2>
+                            <p style="font-size: 1.05rem; margin: 0 0 20px 0; color: #eee; line-height: 1.4; max-width: 550px;">Herramienta web integrada para la contabilidad, conciliación y control interno de cajas de ventas.</p>
+                            <div style="display: flex; gap: 10px;">
+                                <button class="checkout-btn slide-preview-btn" data-link="https://cajaaye.onrender.com/" data-name="Caja A&E" style="padding: 10px 20px; font-size: 0.9rem; font-weight: bold; cursor: pointer; border: none; border-radius: 4px; display: flex; align-items: center; gap: 8px; background-color: #333; color: white;"><i class="fa-solid fa-laptop-code"></i> Previsualizar</button>
+                                <a href="https://cajaaye.onrender.com/" target="_blank" class="checkout-btn" style="padding: 10px 20px; font-size: 0.9rem; font-weight: bold; border-radius: 4px; text-decoration: none; background: #28a745; color: white; border: none; display: flex; align-items: center; gap: 8px;"><i class="fa-solid fa-arrow-up-right-from-square"></i> Visitar Sitio</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Slide 6: InnovaClean -->
+                    <div class="slide" style="position: relative; display: flex; align-items: center; justify-content: center; width: 100%; height: 100%;">
+                        <img src="imagen6.jpeg" alt="InnovaClean" style="width: 100%; height: 100%; object-fit: cover; filter: brightness(0.45);">
+                        <div class="slide-content" style="position: absolute; color: white; text-align: left; left: 8%; max-width: 75%; z-index: 10; font-family: 'Roboto', sans-serif;">
+                            <div style="background: #0071ce; display: inline-block; padding: 4px 10px; border-radius: 4px; font-weight: bold; margin-bottom: 10px; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px;">LANDING PAGE PREMIM</div>
+                            <h2 style="font-size: 2.2rem; font-weight: 900; margin: 0 0 10px 0; color: #ffcc00; line-height: 1.2;">InnovaClean</h2>
+                            <p style="font-size: 1.05rem; margin: 0 0 20px 0; color: #eee; line-height: 1.4; max-width: 550px;">Diseño de página de aterrizaje interactiva y moderna de insumos de higiene ecológicos.</p>
+                            <div style="display: flex; gap: 10px;">
+                                <button class="checkout-btn slide-preview-btn" data-link="https://innovaclean.netlify.app/" data-name="InnovaClean" style="padding: 10px 20px; font-size: 0.9rem; font-weight: bold; cursor: pointer; border: none; border-radius: 4px; display: flex; align-items: center; gap: 8px; background-color: #333; color: white;"><i class="fa-solid fa-laptop-code"></i> Previsualizar</button>
+                                <a href="https://innovaclean.netlify.app/" target="_blank" class="checkout-btn" style="padding: 10px 20px; font-size: 0.9rem; font-weight: bold; border-radius: 4px; text-decoration: none; background: #28a745; color: white; border: none; display: flex; align-items: center; gap: 8px;"><i class="fa-solid fa-arrow-up-right-from-square"></i> Visitar Sitio</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Slide 7: Fútbol Blue Lock -->
+                    <div class="slide" style="position: relative; display: flex; align-items: center; justify-content: center; width: 100%; height: 100%;">
+                        <img src="imagen7.jpeg" alt="Fútbol Blue Lock" style="width: 100%; height: 100%; object-fit: cover; filter: brightness(0.45);">
+                        <div class="slide-content" style="position: absolute; color: white; text-align: left; left: 8%; max-width: 75%; z-index: 10; font-family: 'Roboto', sans-serif;">
+                            <div style="background: #0071ce; display: inline-block; padding: 4px 10px; border-radius: 4px; font-weight: bold; margin-bottom: 10px; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px;">PORTAL DEPORTIVO</div>
+                            <h2 style="font-size: 2.2rem; font-weight: 900; margin: 0 0 10px 0; color: #ffcc00; line-height: 1.2;">Fútbol Blue Lock</h2>
+                            <p style="font-size: 1.05rem; margin: 0 0 20px 0; color: #eee; line-height: 1.4; max-width: 550px;">Comunidad deportiva para la gestión de campeonatos de fútbol, estadísticas y perfiles de jugadores.</p>
+                            <div style="display: flex; gap: 10px;">
+                                <button class="checkout-btn slide-preview-btn" data-link="https://futbolblueloock.netlify.app/" data-name="Fútbol Blue Lock" style="padding: 10px 20px; font-size: 0.9rem; font-weight: bold; cursor: pointer; border: none; border-radius: 4px; display: flex; align-items: center; gap: 8px; background-color: #333; color: white;"><i class="fa-solid fa-laptop-code"></i> Previsualizar</button>
+                                <a href="https://futbolblueloock.netlify.app/" target="_blank" class="checkout-btn" style="padding: 10px 20px; font-size: 0.9rem; font-weight: bold; border-radius: 4px; text-decoration: none; background: #28a745; color: white; border: none; display: flex; align-items: center; gap: 8px;"><i class="fa-solid fa-arrow-up-right-from-square"></i> Visitar Sitio</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Slide 8: Celulares PK -->
+                    <div class="slide" style="position: relative; display: flex; align-items: center; justify-content: center; width: 100%; height: 100%;">
+                        <img src="imagen8.jpeg" alt="Celulares PK" style="width: 100%; height: 100%; object-fit: cover; filter: brightness(0.45);">
+                        <div class="slide-content" style="position: absolute; color: white; text-align: left; left: 8%; max-width: 75%; z-index: 10; font-family: 'Roboto', sans-serif;">
+                            <div style="background: #0071ce; display: inline-block; padding: 4px 10px; border-radius: 4px; font-weight: bold; margin-bottom: 10px; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px;">CATÁLOGO DE TECNOLOGÍA</div>
+                            <h2 style="font-size: 2.2rem; font-weight: 900; margin: 0 0 10px 0; color: #ffcc00; line-height: 1.2;">Celulares PK</h2>
+                            <p style="font-size: 1.05rem; margin: 0 0 20px 0; color: #eee; line-height: 1.4; max-width: 550px;">Portal de venta y cotización de teléfonos móviles, tabletas y accesorios con sistema de filtrado avanzado.</p>
+                            <div style="display: flex; gap: 10px;">
+                                <button class="checkout-btn slide-preview-btn" data-link="https://celularespk.netlify.app/" data-name="Celulares PK" style="padding: 10px 20px; font-size: 0.9rem; font-weight: bold; cursor: pointer; border: none; border-radius: 4px; display: flex; align-items: center; gap: 8px; background-color: #333; color: white;"><i class="fa-solid fa-laptop-code"></i> Previsualizar</button>
+                                <a href="https://celularespk.netlify.app/" target="_blank" class="checkout-btn" style="padding: 10px 20px; font-size: 0.9rem; font-weight: bold; border-radius: 4px; text-decoration: none; background: #28a745; color: white; border: none; display: flex; align-items: center; gap: 8px;"><i class="fa-solid fa-arrow-up-right-from-square"></i> Visitar Sitio</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <button class="slider-btn prev" id="prevBtn"><i class="fa-solid fa-chevron-left"></i></button>
+                <button class="slider-btn next" id="nextBtn"><i class="fa-solid fa-chevron-right"></i></button>
+                
+                <div class="slider-dots" id="sliderDots">
+                    <span class="dot active" data-index="0"></span>
+                    <span class="dot" data-index="1"></span>
+                    <span class="dot" data-index="2"></span>
+                    <span class="dot" data-index="3"></span>
+                    <span class="dot" data-index="4"></span>
+                    <span class="dot" data-index="5"></span>
+                    <span class="dot" data-index="6"></span>
+                    <span class="dot" data-index="7"></span>
+                </div>
+            </div>
+        </section>
+
+        <aside class="ad-box right-ad" style="background-color: #111;">
+            <img src="WhatsApp%20Image%202026-07-16%20at%2016.42.55.jpeg" alt="Logo Lateral Derecho" style="width: 100%; height: 100%; object-fit: contain; display: block;">
+        </aside>
+
+    </main>
+
+    <!-- Brands Slider Section -->
+    <!-- Brands Slider Section -> Todas las Páginas -->
+    <section class="brands-section" style="margin-top: 30px; margin-bottom: 20px; text-align: center; overflow: hidden; background-color: var(--dark-bg); padding: 20px 0; border-top: 2px solid #ff9800; border-bottom: 2px solid #ff9800;">
+        <h2 style="color: #ff9800; margin-bottom: 20px; font-size: 1.8rem; text-transform: uppercase; font-weight: 900; letter-spacing: 2px;">Todas las Páginas</h2>
+        <div class="brands-marquee">
+            <div class="marquee-content">
+                <!-- Miniaturas de Sitios Web creados -->
+                <img src="imagen1.png" alt="A&E" style="height: 70px; object-fit: contain; margin: 0 20px; background: white; padding: 5px; border-radius: 6px; border: 1px solid #ddd; cursor: pointer;" onclick="window.open('https://www.distribuidoraaye.cl/', '_blank')" title="Visitar Distribuidora A&E">
+                <img src="imagen2.jpeg" alt="Eleodoro" style="height: 70px; object-fit: contain; margin: 0 20px; background: white; padding: 5px; border-radius: 6px; border: 1px solid #ddd; cursor: pointer;" onclick="window.open('http://www.eleodoroelgrande.cl', '_blank')" title="Visitar Eleodoro el Grande">
+                <img src="imagen3.jpeg" alt="Disfrazate" style="height: 70px; object-fit: contain; margin: 0 20px; background: white; padding: 5px; border-radius: 6px; border: 1px solid #ddd; cursor: pointer;" onclick="window.open('http://www.disfrazate.cl', '_blank')" title="Visitar Disfrázate">
+                <img src="imagen4.jpeg" alt="Educhile" style="height: 70px; object-fit: contain; margin: 0 20px; background: white; padding: 5px; border-radius: 6px; border: 1px solid #ddd; cursor: pointer;" onclick="window.open('https://educhile.onrender.com/', '_blank')" title="Visitar Educhile">
+                <img src="imagen5.jpeg" alt="Caja A&E" style="height: 70px; object-fit: contain; margin: 0 20px; background: white; padding: 5px; border-radius: 6px; border: 1px solid #ddd; cursor: pointer;" onclick="window.open('https://cajaaye.onrender.com/', '_blank')" title="Visitar Caja A&E">
+                <img src="imagen6.jpeg" alt="InnovaClean" style="height: 70px; object-fit: contain; margin: 0 20px; background: white; padding: 5px; border-radius: 6px; border: 1px solid #ddd; cursor: pointer;" onclick="window.open('https://innovaclean.netlify.app/', '_blank')" title="Visitar InnovaClean">
+                <img src="imagen7.jpeg" alt="Blue Lock" style="height: 70px; object-fit: contain; margin: 0 20px; background: white; padding: 5px; border-radius: 6px; border: 1px solid #ddd; cursor: pointer;" onclick="window.open('https://futbolblueloock.netlify.app/', '_blank')" title="Visitar Fútbol Blue Lock">
+                <img src="imagen8.jpeg" alt="Celulares PK" style="height: 70px; object-fit: contain; margin: 0 20px; background: white; padding: 5px; border-radius: 6px; border: 1px solid #ddd; cursor: pointer;" onclick="window.open('https://celularespk.netlify.app/', '_blank')" title="Visitar Celulares PK">
+                
+                <!-- Duplicados para efecto infinito -->
+                <img src="imagen1.png" alt="A&E" style="height: 70px; object-fit: contain; margin: 0 20px; background: white; padding: 5px; border-radius: 6px; border: 1px solid #ddd; cursor: pointer;" onclick="window.open('https://www.distribuidoraaye.cl/', '_blank')">
+                <img src="imagen2.jpeg" alt="Eleodoro" style="height: 70px; object-fit: contain; margin: 0 20px; background: white; padding: 5px; border-radius: 6px; border: 1px solid #ddd; cursor: pointer;" onclick="window.open('http://www.eleodoroelgrande.cl', '_blank')">
+                <img src="imagen3.jpeg" alt="Disfrazate" style="height: 70px; object-fit: contain; margin: 0 20px; background: white; padding: 5px; border-radius: 6px; border: 1px solid #ddd; cursor: pointer;" onclick="window.open('http://www.disfrazate.cl', '_blank')">
+                <img src="imagen4.jpeg" alt="Educhile" style="height: 70px; object-fit: contain; margin: 0 20px; background: white; padding: 5px; border-radius: 6px; border: 1px solid #ddd; cursor: pointer;" onclick="window.open('https://educhile.onrender.com/', '_blank')">
+                <img src="imagen5.jpeg" alt="Caja A&E" style="height: 70px; object-fit: contain; margin: 0 20px; background: white; padding: 5px; border-radius: 6px; border: 1px solid #ddd; cursor: pointer;" onclick="window.open('https://cajaaye.onrender.com/', '_blank')">
+                <img src="imagen6.jpeg" alt="InnovaClean" style="height: 70px; object-fit: contain; margin: 0 20px; background: white; padding: 5px; border-radius: 6px; border: 1px solid #ddd; cursor: pointer;" onclick="window.open('https://innovaclean.netlify.app/', '_blank')">
+                <img src="imagen7.jpeg" alt="Blue Lock" style="height: 70px; object-fit: contain; margin: 0 20px; background: white; padding: 5px; border-radius: 6px; border: 1px solid #ddd; cursor: pointer;" onclick="window.open('https://futbolblueloock.netlify.app/', '_blank')">
+                <img src="imagen8.jpeg" alt="Celulares PK" style="height: 70px; object-fit: contain; margin: 0 20px; background: white; padding: 5px; border-radius: 6px; border: 1px solid #ddd; cursor: pointer;" onclick="window.open('https://celularespk.netlify.app/', '_blank')">
+            </div>
+        </div>
+    </section>
+
+    <style>
+        .brands-marquee {
+            width: 100%;
+            overflow: hidden;
+            white-space: nowrap;
+            position: relative;
+        }
+        
+        .marquee-content {
+            display: inline-flex;
+            gap: 50px;
+            align-items: center;
+            animation: scroll-marquee 25s linear infinite;
+        }
+        
+        .marquee-content img {
+            height: 60px;
+            object-fit: contain;
+            filter: grayscale(20%) brightness(1.2);
+            transition: filter 0.3s, transform 0.3s;
+            cursor: pointer;
+            border-radius: 8px;
+        }
+        
+        .marquee-content img:hover {
+            filter: grayscale(0%) brightness(1);
+            transform: scale(1.1);
+        }
+        
+        @keyframes scroll-marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(calc(-50% - 25px)); }
+        }
+        
+        @media (max-width: 768px) {
+            .marquee-content img {
+                height: 40px;
+            }
+        }
+    </style>
+
+    <!-- New Content Sections -->
+    <section class="products-section container" id="productos">
+        <h2 class="section-title" id="productos-title">TODOS LOS PRODUCTOS</h2>
+        
+        <div class="supermarket-controls" style="display: flex; justify-content: flex-end; margin-bottom: 20px;">
+            <select id="sort-select" style="padding: 10px; border-radius: 5px; border: 1px solid #ccc; font-family: 'Open Sans', sans-serif;">
+                <option value="default">Relevancia</option>
+                <option value="price-asc">Precio: Menor a Mayor</option>
+                <option value="price-desc">Precio: Mayor a Menor</option>
+            </select>
+        </div>
+
+        <div class="products-grid" id="products-grid">
+            <!-- Los productos se cargarán dinámicamente desde script.js -->
+        </div>
+
+        <div id="pagination-controls" style="display: flex; justify-content: center; align-items: center; gap: 15px; margin-top: 30px;">
+            <!-- Controles de paginación generados por JS -->
+        </div>
+    </section>
+
+    <!-- Excel Inventory Section -->
+    <section class="excel-section container" id="catalogo-excel" style="margin-top: 60px; margin-bottom: 60px; text-align: center; padding: 40px; background-color: var(--bg-color); border: 1px solid var(--border-color); border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.5);">
+        <h2 class="section-title">INVENTARIO COMPLETO</h2>
+        <p style="color: var(--text-color); margin-bottom: 30px; font-size: 1.2rem;">Descarga nuestro inventario real actualizado con todos los productos disponibles en formato Excel.</p>
+        <a href="libros%20de%20venta/inventario%20a&e.xlsx" download="Inventario_A&E_Limpieza.xlsx" style="display: inline-flex; align-items: center; background-color: #217346; color: white; padding: 15px 35px; border-radius: 30px; text-decoration: none; font-weight: bold; font-size: 1.2rem; transition: transform 0.2s, background-color 0.3s; box-shadow: 0 4px 10px rgba(0,0,0,0.3); margin-bottom: 40px;">
+            <i class="fa-solid fa-file-excel" style="margin-right: 12px; font-size: 1.5rem;"></i> Descargar Archivo Excel
+        </a>
+
+        <!-- Visor del PDF debajo del botón -->
+        <h3 style="color: var(--text-color); margin-bottom: 15px; font-size: 1.1rem; text-transform: uppercase;">Vista Previa del Catálogo (PDF)</h3>
+        <div style="width: 100%; height: 800px; border: 1px solid var(--border-color); border-radius: 8px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+            <iframe src="libros%20de%20venta/lista_productos_tabla_limpia.pdf" width="100%" height="100%" style="border: none;"></iframe>
+        </div>
+    </section>
+
+    <section class="media-section container">
+        <h2 class="section-title">MÁS SOBRE NOSOTROS</h2>
+        <div class="media-grid">
+            <div class="media-video">
+                <video src="videoaseo1.mp4.mp4" controls playsinline preload="none"></video>
+            </div>
+            <div class="media-images">
+                <img src="nuevo%20catalogo/logo10.jpg" alt="Local Distribuidora A&E" loading="lazy">
+                <img src="nuevo%20catalogo/detergente%20publi.webp" alt="Productos de Aseo" loading="lazy">
+                <img src="nuevo%20catalogo/logo9.png" alt="Limpieza Profesional" loading="lazy">
+            </div>
+        </div>
+    </section>
+
+    <section class="news-section container">
+        <h2 class="section-title">NOTICIAS Y NOVEDADES</h2>
+        <div class="news-grid">
+            <div class="news-card" style="border: 3px solid #ffcc00; box-shadow: 0 0 15px rgba(255,204,0,0.5); position: relative; overflow: hidden;">
+                <div style="position: absolute; top: 10px; right: -35px; background: #e74c3c; color: white; padding: 5px 40px; transform: rotate(45deg); font-weight: bold; font-size: 1.1rem; box-shadow: 0 2px 5px rgba(0,0,0,0.3); z-index: 10;">¡OFERTA!</div>
+                <img src="nuevo%20catalogo/Producto80730HBP-MonsalMedic.cl-Principal.webp" alt="Promoción 5 Litros" loading="lazy" style="height: 220px; object-fit: contain; width: 100%; background: #fff; padding: 15px;">
+                <div class="news-content" style="background: linear-gradient(135deg, #0071ce, #005bb5); color: white; text-align: center; padding: 20px;">
+                    <h3 style="color: #ffcc00; font-size: 1.6rem; margin-bottom: 5px; text-shadow: 1px 1px 2px rgba(0,0,0,0.5);">¡SUPER PROMOCIÓN!</h3>
+                    <p style="font-size: 1.3rem; font-weight: 900; margin: 10px 0; line-height: 1.2;">5 LITROS POR <span style="font-size: 2.2rem; color: #ffcc00; display: block; margin-top: 5px; text-shadow: 2px 2px 4px rgba(0,0,0,0.4);">$3.190</span></p>
+                    <a href="https://wa.me/56989784973?text=Hola,%20quiero%20la%20promoción%20de%205%20litros%20por%203190" target="_blank" class="read-more" style="background: #25D366; color: white; padding: 10px 20px; border-radius: 50px; font-weight: bold; text-decoration: none; display: inline-block; margin-top: 10px; box-shadow: 0 4px 10px rgba(37,211,102,0.4); border: none;"><i class="fa-brands fa-whatsapp"></i> Pedir por WhatsApp</a>
+                </div>
+            </div>
+            <div class="news-card">
+                <img src="nuevo%20catalogo/logo10.jpg" alt="Noticia Promociones" loading="lazy" style="height: 200px; object-fit: cover; width: 100%;">
+                <div class="news-content">
+                    <span class="news-date">10 de Junio, 2026</span>
+                    <h3>Promociones Especiales de Invierno</h3>
+                    <p>Aprovecha nuestros packs de limpieza profunda, perfectos para mantener tu hogar y empresa libres de virus y bacterias este invierno.</p>
+                    <a href="#" class="read-more">Leer más</a>
+                </div>
+            </div>
+            <div class="news-card">
+                <video src="nuevo%20catalogo/babysecvideo.mp4.mp4" controls playsinline preload="none" style="height: 200px; object-fit: cover; width: 100%;"></video>
+                <div class="news-content">
+                    <span class="news-date">5 de Junio, 2026</span>
+                    <h3>¡Nuevas Marcas de Pañales!</h3>
+                    <p>Mantén a los más pequeños cómodos con nuestra nueva línea de pañales Babysec y alternativas al por mayor.</p>
+                    <a href="#" class="read-more">Leer más</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="main-footer">
+        <div class="container footer-container">
+            <div class="footer-col">
+                <h4>A&E Máxima Limpieza</h4>
+                <p>Tu distribuidora de confianza en productos de aseo para el hogar y empresas. Despachos rápidos y el mejor servicio a tu puerta.</p>
+            </div>
+            
+            <div class="footer-section links">
+                <h4>Enlaces Rápidos</h4>
+                <ul>
+                    <li><a href="#productos"><i class="fa-solid fa-chevron-right"></i> Ir a Productos</a></li>
+                    <li><a href="terminos.html" target="_blank"><i class="fa-solid fa-chevron-right"></i> Términos y Condiciones</a></li>
+                    <li><a href="privacidad.html" target="_blank"><i class="fa-solid fa-chevron-right"></i> Política de Privacidad</a></li>
+                    <li><a href="devoluciones.html" target="_blank"><i class="fa-solid fa-chevron-right"></i> Devoluciones y Reembolsos</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section contact">
+                <h4>Contáctanos</h4>
+                <p><i class="fa-solid fa-phone"></i> +56 9 2040 3682 / +56 9 8303 9228</p>
+                <p><i class="fa-solid fa-envelope"></i> detergentesae@gmail.com</p>
+                <p><i class="fa-solid fa-location-dot"></i> El Parrón 331, Pudahuel <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Coronel Luis Camaño #1028, Pudahuel</p>
+                <p><i class="fa-solid fa-clock"></i> Lunes a Sábado: 9:00 a 20:00 hrs</p>
+                <div class="footer-social" style="margin-top: 15px;">
+                    <h4 style="font-size: 1rem; margin-bottom: 10px;">Síguenos</h4>
+                    <a href="#" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
+                    <a href="#" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2026 A&E Máxima Limpieza. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/56989784973" target="_blank" class="whatsapp-btn">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <!-- Shopping Cart Modal -->
+    <div id="cart-modal" class="cart-modal hidden">
+        <div class="cart-content">
+            <div class="cart-header">
+                <h2>Tu Carrito</h2>
+                <button id="close-cart-btn" class="close-cart-btn"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="cart-items" id="cart-items-container">
+                <!-- Cart items will be injected here -->
+                <p class="empty-cart-msg">Tu carrito está vacío.</p>
+            </div>
+            <div class="cart-footer">
+                <div class="cart-total" style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                    <span>Subtotal:</span>
+                    <span id="cart-subtotal-price">$0</span>
+                </div>
+                <div class="cart-total" style="display: flex; justify-content: space-between; margin-bottom: 5px; color: #888; font-size: 14px;">
+                    <span>Envío:</span>
+                    <span id="cart-shipping-price">$3.000</span>
+                </div>
+                <div class="cart-total" style="display: flex; justify-content: space-between; margin-bottom: 15px; font-size: 20px; font-weight: bold; border-top: 1px solid var(--border-color); padding-top: 10px;">
+                    <span>Total (IVA inc):</span>
+                    <span id="cart-total-price">$0</span>
+                </div>
+                <div class="checkout-form" id="checkout-form-container">
+                    <input type="text" id="customer-name" placeholder="Tu Nombre y Apellido (Receptor)" required style="width:100%; padding: 10px; margin-bottom:10px; border-radius: 5px; border: 1px solid var(--border-color); background: var(--dark-bg); color: var(--text-dark);">
+                    <input type="text" id="customer-rut" placeholder="RUT (opcional)" style="width:100%; padding: 10px; margin-bottom:10px; border-radius: 5px; border: 1px solid var(--border-color); background: var(--dark-bg); color: var(--text-dark);">
+                    
+                    <label style="display: block; font-size: 14px; margin-bottom: 5px; color: #ccc; text-align: left;">Método de Entrega:</label>
+                    <select id="shipping-method" required style="width:100%; padding: 10px; margin-bottom:10px; border-radius: 5px; border: 1px solid var(--border-color); background: var(--dark-bg); color: var(--text-dark);">
+                        <option value="despacho">Despacho a Domicilio ($3.000)</option>
+                        <option value="retiro">Retiro en Tienda (Gratis - Pudahuel)</option>
+                    </select>
+
+                    <input type="text" id="customer-address" placeholder="Dirección de Despacho Exacta" required style="width:100%; padding: 10px; margin-bottom:10px; border-radius: 5px; border: 1px solid var(--border-color); background: var(--dark-bg); color: var(--text-dark);">
+                    <select id="customer-commune" required style="width:100%; padding: 10px; margin-bottom:10px; border-radius: 5px; border: 1px solid var(--border-color); background: var(--dark-bg); color: var(--text-dark);">
+                        <option value="">Selecciona Comuna</option>
+                        <option value="Cerro Navia">Cerro Navia</option>
+                        <option value="Pudahuel">Pudahuel</option>
+                        <option value="Lo Prado">Lo Prado</option>
+                        <option value="Quinta Normal">Quinta Normal</option>
+                        <option value="Otra">Otra (Consultar factibilidad)</option>
+                    </select>
+                    
+                    <label style="display: flex; align-items: flex-start; gap: 10px; font-size: 13px; color: #aaa; margin-bottom: 15px;">
+                        <input type="checkbox" id="legal-checkbox" required style="margin-top: 3px;">
+                        <span>Confirmo que soy mayor de 18 años y acepto los <a href="terminos.html" style="color: var(--primary-color);">términos y condiciones</a>. Entiendo que se solicitará Cédula de Identidad al momento de la entrega.</span>
+                    </label>
+
+                    <button id="checkout-btn" class="checkout-btn" style="background-color: #0099cc; color: white;">Pagar con Webpay <i class="fa-solid fa-credit-card"></i></button>
+                    <p id="time-restriction-msg" style="color: var(--warning-red); font-weight: bold; margin-top: 10px; font-size: 14px; text-align: center; display: none;">
+                        <i class="fa-solid fa-clock"></i> Fuera de horario de reparto.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div id="login-modal" class="cart-modal hidden" style="justify-content: center; align-items: center;">
+        <div class="cart-content" style="height: auto; border-radius: 8px; max-width: 350px;">
+            <div class="cart-header">
+                <h2>Acceso Administrativo</h2>
+                <button id="close-login-btn" class="close-cart-btn"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="cart-items" style="padding: 20px;">
+                <input type="text" id="login-user" placeholder="Usuario" style="width:100%; padding: 10px; margin-bottom:15px; border-radius: 5px; border: 1px solid #ccc;">
+                <input type="password" id="login-pass" placeholder="Contraseña" style="width:100%; padding: 10px; margin-bottom:15px; border-radius: 5px; border: 1px solid #ccc;">
+                <button id="submit-login-btn" class="checkout-btn" style="width:100%;">Ingresar</button>
+                <p id="login-error" style="color: #d32f2f; font-size: 14px; text-align: center; margin-top: 10px; display: none;">Credenciales incorrectas.</p>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Comunidad Modal -->
+    <div id="comunidad-modal" class="cart-modal hidden" style="justify-content: center; align-items: center; z-index: 999999;">
+        <div class="cart-content" style="height: 85vh; overflow-y: auto; border-radius: 8px; max-width: 650px; background: var(--dark-bg); border: 2px solid #0071ce; padding: 0;">
+            <div class="cart-header" style="background: #0071ce; padding: 15px; position: sticky; top: 0; z-index: 10; display: flex; justify-content: space-between; align-items: center;">
+                <h2 style="color: white; margin: 0; font-size: 1.5rem;"><i class="fa-solid fa-users"></i> Comunidad A&E</h2>
+                <button id="close-comunidad-btn" class="close-cart-btn" style="color: white;"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            
+            <!-- Hero Image Comunidad -->
+            <div style="width: 100%; height: 200px; overflow: hidden; position: relative;">
+                <img src="https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?q=80&w=800&auto=format&fit=crop" alt="Comunidad Limpieza" style="width: 100%; height: 100%; object-fit: cover;">
+                <div style="position: absolute; bottom: 0; left: 0; width: 100%; padding: 20px; background: linear-gradient(transparent, rgba(0,0,0,0.9)); color: white;">
+                    <h3 style="margin: 0; font-size: 1.8rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.8);">¡Bienvenidos a la Familia!</h3>
+                    <p style="margin: 5px 0 0 0; color: #ffcc00; font-weight: bold;">La limpieza en su máxima expresión</p>
+                </div>
+            </div>
+
+            <div class="cart-items" style="padding: 25px; color: white;">
+                
+                <!-- Concursos -->
+                <div style="background: rgba(255,152,0,0.1); border: 1px solid #ff9800; border-radius: 8px; overflow: hidden; margin-bottom: 25px;">
+                    <div style="padding: 20px;">
+                        <h3 style="color: #ff9800; margin-bottom: 10px; font-size: 1.3rem;"><i class="fa-solid fa-trophy"></i> Sorteo Activo</h3>
+                        <h4 style="font-size: 1.2rem; margin-bottom: 5px;">¡Gana 1 mes de limpieza gratis! ✨</h4>
+                        <p style="margin-bottom: 10px; font-size: 0.95rem; color: #ddd; line-height: 1.5;">Por compras superiores a $50.000, participas automáticamente en nuestro gran sorteo.</p>
+                        <p style="font-weight: bold; color: #ffcc00; font-size: 0.9rem;">Fecha del Sorteo: 30 de Agosto 2026</p>
+                    </div>
+                </div>
+
+                <!-- Promociones Exclusivas -->
+                <div style="background: rgba(231,76,60,0.1); border: 1px solid #e74c3c; border-radius: 8px; overflow: hidden; margin-bottom: 25px; display: flex; flex-direction: column;">
+                    <div style="padding: 20px;">
+                        <h3 style="color: #e74c3c; margin-bottom: 10px; font-size: 1.3rem;"><i class="fa-solid fa-tag"></i> Promo Flash Comunidad</h3>
+                        <h4 style="font-size: 1.2rem; margin-bottom: 5px;">40% DCTO. en Cloro y Desinfectantes</h4>
+                        <p style="margin-bottom: 10px; font-size: 0.95rem; color: #ddd; line-height: 1.5;">Muestra este código secreto en caja o menciónalo a nuestro vendedor de WhatsApp para aplicar tu descuento exclusivo.</p>
+                        <div style="background: #111; padding: 10px; text-align: center; border-radius: 4px; font-size: 1.5rem; letter-spacing: 5px; font-weight: 900; color: #e74c3c; margin-top: 10px;">ASEO40</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Modal -->
+    <div id="contact-modal" class="cart-modal hidden" style="justify-content: center; align-items: center; z-index: 999999;">
+        <div class="cart-content" style="max-height: 85vh; overflow-y: auto; border-radius: 8px; max-width: 450px; background: var(--dark-bg); border: 2px solid var(--primary-color);">
+            <div class="cart-header" style="background: var(--primary-color); padding: 15px;">
+                <h2 style="color: white; margin: 0;"><i class="fa-solid fa-address-book"></i> Contacto</h2>
+                <button id="close-contact-btn" class="close-cart-btn" style="color: white;"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="cart-items" style="padding: 25px; font-size: 1.1rem; line-height: 1.6; color: #333;">
+                <p style="margin-bottom: 15px;"><i class="fa-solid fa-clock" style="color: #ffcc00; width: 25px;"></i> <strong>Horario de Atención:</strong> <br>
+                <span style="display: inline-block; margin-left: 30px;">Lunes a Sábado 9:00 a 20:00 hrs</span></p>
+
+                <p style="margin-bottom: 15px;"><i class="fa-brands fa-whatsapp" style="color: #25D366; width: 25px;"></i> <strong>Teléfono / WhatsApp:</strong> <br>
+                <span style="display: inline-block; margin-left: 30px;"><a href="https://wa.me/56989784973" target="_blank" style="color: #333; text-decoration: none; font-weight: bold;">+56 9 8978 4973</a></span></p>
+                
+                <p style="margin-bottom: 15px;"><i class="fa-solid fa-envelope" style="color: #0071ce; width: 25px;"></i> <strong>Correo:</strong> <a href="mailto:detergentesae@gmail.com" style="color: #333; text-decoration: none; font-size: 0.95rem; font-weight: bold;">detergentesae@gmail.com</a></p>
+                
+                <div style="margin-top: 20px; border-top: 1px solid rgba(0,0,0,0.1); padding-top: 15px;">
+                    <p style="margin-bottom: 10px; color: #ffcc00; font-weight: bold; text-transform: uppercase;"><i class="fa-solid fa-location-dot" style="color: #e74c3c; width: 20px;"></i> Nuestras Direcciones</p>
+                    <p style="margin-bottom: 5px; margin-left: 25px;">- El Parrón 331, Pudahuel</p>
+                    <p style="margin-bottom: 5px; margin-left: 25px;">- Coronel Luis Camaño #1028, Pudahuel</p>
+                </div>
+                
+                <!-- Info de Despachos -->
+                <div style="margin-top: 20px; border-top: 1px solid rgba(0,0,0,0.1); padding-top: 15px; background: rgba(0, 113, 206, 0.05); border-radius: 8px; padding: 15px;">
+                    <p style="margin-bottom: 15px; color: #0071ce; font-weight: bold; text-transform: uppercase; font-size: 1.2rem;"><i class="fa-solid fa-truck-fast"></i> Información de Despachos</p>
+                    
+                    <div style="margin-bottom: 15px;">
+                        <strong style="color: #ffcc00;"><i class="fa-solid fa-calendar-days"></i> Todos los días:</strong>
+                        <p style="margin: 5px 0 0 25px; font-size: 0.95rem; line-height: 1.4;">Pudahuel, Cerro Navia, Lo Prado, Quinta Normal, Maipú.</p>
+                        <p style="margin: 2px 0 0 25px; font-size: 0.95rem; color: #25D366; font-weight: bold;">Costo: $3.000 (Pedido mínimo $70.000)</p>
+                    </div>
+
+                    <div style="margin-bottom: 15px;">
+                        <strong style="color: #ffcc00;"><i class="fa-solid fa-calendar-week"></i> Lunes, Miércoles y Viernes:</strong>
+                        <p style="margin: 5px 0 0 25px; font-size: 0.95rem; line-height: 1.4;">Quilicura, Independencia, Recoleta, Cerrillos, Renca, Estación Central.</p>
+                        <p style="margin: 2px 0 0 25px; font-size: 0.95rem; color: #25D366; font-weight: bold;">Costo: $4.000 (Pedido mínimo $70.000)</p>
+                    </div>
+
+                    <div style="border-top: 1px dashed rgba(0,0,0,0.2); margin-top: 15px; padding-top: 15px;">
+                        <p style="margin-bottom: 5px;"><i class="fa-regular fa-clock" style="color: #ffcc00; width: 25px;"></i> <strong>Horarios de Reparto:</strong> 10:00 a 17:00 hrs.</p>
+                        <p style="color: #ff9800; font-weight: bold;"><i class="fa-solid fa-gift" style="width: 25px;"></i> ¡Despacho GRATIS por compras sobre $250.000!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Reproductor de Audio -->
+    <div class="audio-player-container">
+        <audio id="bg-music" controls loop>
+            <source src="Wiz%20Khalifa%20feat.Charlie%20Puth%20-%20See%20You%20Again%20(BKAYE%20Remix)%20(Tropical%20House).mp3" type="audio/mpeg">
+            Tu navegador no soporta el elemento de audio.
+        </audio>
+    </div>
+
+    <!-- Mayorista Modal -->
+    <div id="mayorista-modal" class="cart-modal hidden" style="justify-content: center; align-items: center; z-index: 999999;">
+        <div class="cart-content" style="max-height: 85vh; overflow-y: auto; border-radius: 8px; max-width: 500px; background: white; border: 2px solid #28a745;">
+            <div class="cart-header" style="background: #28a745; padding: 15px;">
+                <h2 style="color: white; margin: 0;"><i class="fa-solid fa-boxes-stacked"></i> Ventas por Mayor</h2>
+                <button id="close-mayorista-btn" class="close-cart-btn" style="color: white;"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="cart-items" style="padding: 25px; font-size: 1.1rem; line-height: 1.6; color: #333; text-align: center;">
+                <p style="margin-bottom: 20px; font-weight: bold; font-size: 1.2rem; color: #28a745;">Para Ventas por Mayor, comunícate directamente con nosotros a través de:</p>
+                <p style="margin-bottom: 15px;"><i class="fa-brands fa-whatsapp" style="color: #25D366; font-size: 1.5rem;"></i> <br>
+                <a href="https://wa.me/56989784973" target="_blank" style="color: #333; text-decoration: none; font-weight: bold; font-size: 1.3rem;">+56 9 8978 4973</a></p>
+                <p style="margin-bottom: 25px;"><i class="fa-solid fa-envelope" style="color: #0071ce; font-size: 1.5rem;"></i> <br>
+                <a href="mailto:detergentesae@gmail.com" style="color: #333; text-decoration: none; font-weight: bold; font-size: 1.2rem;">detergentesae@gmail.com</a></p>
+                
+                <div style="margin-top: 20px; border-top: 1px solid rgba(0,0,0,0.1); padding-top: 25px;">
+                    <p style="margin-bottom: 15px;">También puedes descargar o visualizar nuestro Catálogo en PDF:</p>
+                    <a href="libros%20de%20venta/lista_productos_tabla_limpia.pdf" target="_blank" class="checkout-btn" style="background: #0071ce; color: white; display: inline-block; width: auto; padding: 10px 20px; text-decoration: none; border-radius: 5px;"><i class="fa-solid fa-file-pdf"></i> Ver Catálogo PDF</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Soporte Modal -->
+    <div id="soporte-modal" class="cart-modal hidden" style="justify-content: center; align-items: center; z-index: 999999;">
+        <div class="cart-content" style="max-height: 85vh; overflow-y: auto; border-radius: 8px; max-width: 450px; background: var(--dark-bg); border: 2px solid #00d2fc;">
+            <div class="cart-header" style="background: #00d2fc; padding: 15px; display: flex; justify-content: space-between; align-items: center;">
+                <h2 style="color: white; margin: 0; font-size: 1.5rem;"><i class="fa-solid fa-headset"></i> Soporte Técnico</h2>
+                <button id="close-soporte-btn" class="close-cart-btn" style="color: white;"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="cart-items" style="padding: 25px; font-size: 1.1rem; line-height: 1.6; color: #333; text-align: center;">
+                <p style="margin-bottom: 20px; font-weight: bold; font-size: 1.2rem; color: #0071ce;">¿Tienes problemas o preguntas con tus productos o pedidos? Contáctanos de inmediato:</p>
+                <p style="margin-bottom: 15px;"><i class="fa-brands fa-whatsapp" style="color: #25D366; font-size: 1.5rem;"></i> <br>
+                <a href="https://wa.me/56989784973" target="_blank" style="color: #333; text-decoration: none; font-weight: bold; font-size: 1.3rem;">Soporte vía WhatsApp</a></p>
+                <p style="margin-bottom: 25px;"><i class="fa-solid fa-envelope" style="color: #0071ce; font-size: 1.5rem;"></i> <br>
+                <a href="mailto:detergentesae@gmail.com" style="color: #333; text-decoration: none; font-weight: bold; font-size: 1.2rem;">detergentesae@gmail.com</a></p>
+                <p style="font-size: 0.95rem; color: #666;">Nuestro equipo de soporte está disponible de Lunes a Sábado: 9:00 a 20:00 hrs.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Live Preview Modal -->
+    <div id="live-preview-modal" class="cart-modal hidden" style="justify-content: center; align-items: center; z-index: 9999999; background: rgba(0,0,0,0.85); position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; display: none;">
+        <div class="preview-modal-content" style="width: 95%; height: 90%; background: #1e1e1e; border-radius: 12px; border: 2px solid #0071ce; display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.5);">
+            
+            <!-- Header del Modal Preview -->
+            <div class="preview-modal-header" style="background: #2b2b2b; padding: 12px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #0071ce; flex-wrap: wrap; gap: 10px;">
+                <div style="display: flex; align-items: center; gap: 15px; flex-wrap: wrap;">
+                    <h3 id="preview-site-title" style="color: white; margin: 0; font-size: 1.2rem; font-weight: bold; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 250px;">Vista Previa</h3>
+                    <!-- Device Selectors -->
+                    <div style="display: flex; gap: 8px; background: #1a1a1a; padding: 4px; border-radius: 6px; border: 1px solid #444;">
+                        <button id="device-desktop" class="device-btn active" style="background: #0071ce; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 13px; display: flex; align-items: center; gap: 5px; transition: all 0.2s;"><i class="fa-solid fa-desktop"></i> Desktop</button>
+                        <button id="device-tablet" class="device-btn" style="background: transparent; color: #ccc; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 13px; display: flex; align-items: center; gap: 5px; transition: all 0.2s;"><i class="fa-solid fa-tablet-screen-button"></i> Tablet</button>
+                        <button id="device-mobile" class="device-btn" style="background: transparent; color: #ccc; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 13px; display: flex; align-items: center; gap: 5px; transition: all 0.2s;"><i class="fa-solid fa-mobile-screen-button"></i> Mobile</button>
+                    </div>
+                </div>
+                
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <a id="preview-visit-link" href="#" target="_blank" class="checkout-btn" style="background: #28a745; color: white; padding: 8px 15px; border-radius: 5px; text-decoration: none; font-size: 13px; font-weight: bold; display: flex; align-items: center; gap: 5px;"><i class="fa-solid fa-arrow-up-right-from-square"></i> Abrir en otra pestaña</a>
+                    <button id="close-preview-btn" style="background: transparent; border: none; color: #ff5f56; font-size: 2rem; cursor: pointer; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.2)'" onmouseout="this.style.transform='scale(1)'"><i class="fa-solid fa-circle-xmark"></i></button>
+                </div>
+            </div>
+
+            <!-- Iframe Container that resizes -->
+            <div id="preview-iframe-wrapper" style="flex: 1; display: flex; justify-content: center; align-items: center; background: #121212; padding: 15px; position: relative;">
+                <iframe id="preview-iframe" src="" style="width: 100%; height: 100%; border: none; background: white; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.8); transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);"></iframe>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Firebase App -->
+    <script type="module" src="firebase-config.js"></script>
+    <!-- Scripts -->
+    <script src="catalogo.js?v=1784179884622"></script>
+    <script src="script.js?v=1784179884622"></script>
+</body>
+</html>
