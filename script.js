@@ -6,18 +6,14 @@ let updateBranchMenu = null;
 let baseCatalogo = catalogoProductos;
 
 document.addEventListener('DOMContentLoaded', () => {
-    function getCatalogMiniSites() {
-        return (baseCatalogo || []).filter(p => p && p.category !== 'SERVICIOS');
-    }
-
     updateBranchMenu = function(branchName) {
         baseCatalogo = catalogoProductos;
         
         // Re-renderizar productos
         if (typeof setProducts === 'function') {
-            setProducts(getCatalogMiniSites());
+            setProducts(baseCatalogo);
             const productsTitle = document.getElementById('productos-title');
-            if (productsTitle) productsTitle.textContent = 'CATALOGO MINI SITIOS WEB';
+            if (productsTitle) productsTitle.textContent = 'TODOS LOS PRODUCTOS';
             
             const navLinks = document.querySelectorAll('.nav-container a');
             navLinks.forEach(l => {
@@ -391,8 +387,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Inicializar catalogo: solo mini sitios web (sin servicios)
-    setProducts(getCatalogMiniSites());
+    // Inicializar con TODOS LOS PRODUCTOS de la sucursal actual
+    setProducts(baseCatalogo);
 
     // Navegación por categorías
     navLinks.forEach(link => {
@@ -421,14 +417,14 @@ document.addEventListener('DOMContentLoaded', () => {
             if (category === 'PROMOCIONES') {
                 productsTitle.textContent = 'NUESTROS PRODUCTOS DESTACADOS';
             } else if (category === 'TODOS') {
-                productsTitle.textContent = 'CATALOGO MINI SITIOS WEB';
+                productsTitle.textContent = 'TODOS LOS PRODUCTOS';
             } else {
                 productsTitle.textContent = 'PRODUCTOS: ' + category;
             }
 
             let filtrados;
             if (category === 'TODOS') {
-                filtrados = getCatalogMiniSites();
+                filtrados = baseCatalogo;
             } else {
                 filtrados = baseCatalogo.filter(p => p.category === category);
                 if (category === 'PROMOCIONES') {
@@ -455,13 +451,13 @@ document.addEventListener('DOMContentLoaded', () => {
     function performSearch() {
         const query = searchInput.value.toLowerCase().trim();
         if (query === '') {
-            setProducts(getCatalogMiniSites());
-            productsTitle.textContent = 'CATALOGO MINI SITIOS WEB';
+            setProducts(baseCatalogo);
+            productsTitle.textContent = 'TODOS LOS PRODUCTOS';
             return;
         }
 
-        // Filtrar en el catalogo (mini sitios web, excluyendo servicios)
-        const resultados = getCatalogMiniSites().filter(p => {
+        // Filtrar productos
+        const resultados = baseCatalogo.filter(p => {
             const name = p.name ? p.name.toLowerCase() : '';
             const category = p.category ? p.category.toLowerCase() : '';
             return name.includes(query) || category.includes(query);
