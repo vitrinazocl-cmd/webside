@@ -52,18 +52,29 @@ document.addEventListener('DOMContentLoaded', () => {
         slide.style.width = `${100 / numSlides}%`;
     });
 
-    // Optimiza carga del slider: primera imagen prioritaria, resto diferido.
-    const slideImages = track.querySelectorAll('.slide img');
-    slideImages.forEach((img, index) => {
-        img.decoding = 'async';
-        if (index === 0) {
-            img.loading = 'eager';
-            img.fetchPriority = 'high';
-        } else {
-            img.loading = 'lazy';
-            img.fetchPriority = 'low';
+    // Optimiza carga del slider: primer medio prioritario, resto diferido.
+    const slideMedia = track.querySelectorAll('.slide img, .slide video');
+    slideMedia.forEach((media, index) => {
+        if (media.tagName === 'IMG') {
+            media.decoding = 'async';
+            media.loading = index === 0 ? 'eager' : 'lazy';
+            media.fetchPriority = index === 0 ? 'high' : 'low';
+        }
+
+        if (media.tagName === 'VIDEO') {
+            media.preload = index === 0 ? 'auto' : 'metadata';
+            if (index === 0) {
+                media.muted = true;
+                media.playsInline = true;
+            }
         }
     });
+
+    const heroSlideVideo = document.getElementById('hero-slide-video');
+    if (heroSlideVideo) {
+        heroSlideVideo.currentTime = 0;
+        heroSlideVideo.play().catch(() => {});
+    }
 
     function updateSlider() {
         const slideWidth = 100 / numSlides;
@@ -116,6 +127,9 @@ document.addEventListener('DOMContentLoaded', () => {
             startAutoPlay();
         });
     });
+
+    // Force first slide at startup, then autoplay
+    updateSlider();
 
     // Start auto slide
     startAutoPlay();
