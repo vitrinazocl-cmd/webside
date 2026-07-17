@@ -9,38 +9,70 @@ const catalogoProductos = [
     },
     {
         "id": "site_eleodoro",
+        "name": "Eleodoro el Grande",
+        "category": "PROMOCIONES",
+        "image": "imagen2.jpeg",
+        "link": "https://www.eleodoroelgrande.cl",
+        "description": "Sitio corporativo para cotizaciones en linea con estructura clara y enfoque comercial."
+    },
+    {
+        "id": "site_dismac",
+        "name": "Disfrazate",
+        "category": "PROMOCIONES",
+        "image": "imagen3.jpeg",
+        "link": "https://www.disfrazate.cl",
+        "description": "Catalogo digital de productos con enfoque visual y navegacion optimizada para conversion."
+    },
+    {
+        "id": "site_educhile",
+        "name": "Educhile",
+        "category": "PROMOCIONES",
+        "image": "imagen4.jpeg",
+        "link": "https://educhile.onrender.com/",
+        "description": "Plataforma educativa web con interfaz moderna y estructura adaptable a moviles."
+    },
+    {
+        "id": "site_caja",
+        "name": "Caja A&E",
+        "category": "PROMOCIONES",
+        "image": "imagen5.jpeg",
+        "link": "https://cajaaye.onrender.com/",
+        "description": "Sistema web para gestion y control de caja con panel claro y flujo rapido."
+    },
+    {
+        "id": "svc_sitios_web",
         "name": "Sitios Web",
         "category": "SERVICIOS",
         "image": "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?auto=format&fit=crop&w=1200&q=80",
         "link": "https://www.eleodoroelgrande.cl",
-        "description": "Diseno y desarrollo de sitios web modernos, optimizados para velocidad, SEO y conversion en moviles y escritorio."
+        "description": "Diseno y desarrollo de sitios web modernos, optimizados para velocidad, SEO y conversion."
     },
     {
-        "id": "site_dismac",
+        "id": "svc_aplicaciones",
         "name": "Aplicaciones",
         "category": "SERVICIOS",
         "image": "https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?auto=format&fit=crop&w=1200&q=80",
         "link": "https://cajaaye.onrender.com/",
-        "description": "Aplicaciones web a medida para ventas, operaciones y procesos internos con enfoque en rendimiento y escalabilidad."
+        "description": "Aplicaciones web a medida para ventas, operaciones y procesos internos con enfoque escalable."
     },
     {
-        "id": "site_educhile",
+        "id": "svc_dashboard",
         "name": "Dashboard",
         "category": "SERVICIOS",
         "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80",
         "link": "https://cajaaye.onrender.com/",
-        "description": "Dashboards con metricas en tiempo real para controlar ventas, indicadores y rendimiento de tu negocio."
+        "description": "Dashboards con metricas en tiempo real para controlar ventas e indicadores clave."
     },
     {
-        "id": "site_caja",
+        "id": "svc_automatizaciones",
         "name": "Automatizaciones",
         "category": "SERVICIOS",
         "image": "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80",
         "link": "https://www.distribuidoraaye.cl/",
-        "description": "Automatizacion de tareas repetitivas, integraciones y flujos de trabajo para ahorrar tiempo y reducir errores."
+        "description": "Automatizacion de tareas repetitivas e integraciones para ahorrar tiempo y reducir errores."
     },
     {
-        "id": "site_soporte",
+        "id": "svc_soporte",
         "name": "Soporte Tecnico",
         "category": "SERVICIOS",
         "image": "https://images.unsplash.com/photo-1580894732444-8ecded7900cd?auto=format&fit=crop&w=1200&q=80",
