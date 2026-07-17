@@ -145,6 +145,112 @@
                 transform: translate3d(-1.2%, 1.2%, 0) scale(1.08);
             }
         }
+
+        .galaxy-craft-layer {
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .galaxy-ufo,
+        .galaxy-delta {
+            position: absolute;
+            opacity: 0.35;
+            filter: drop-shadow(0 0 5px rgba(183, 232, 255, 0.75));
+            will-change: transform, opacity;
+        }
+
+        .galaxy-ufo {
+            width: 38px;
+            height: 14px;
+            border-radius: 50% / 70%;
+            background: linear-gradient(180deg, rgba(222, 244, 255, 0.92), rgba(116, 196, 236, 0.7));
+            box-shadow: inset 0 -2px 4px rgba(3, 43, 78, 0.45);
+        }
+
+        .galaxy-ufo::before {
+            content: "";
+            position: absolute;
+            width: 15px;
+            height: 8px;
+            left: 50%;
+            top: -6px;
+            transform: translateX(-50%);
+            border-radius: 50% 50% 45% 45%;
+            background: linear-gradient(180deg, rgba(239, 251, 255, 0.95), rgba(143, 224, 255, 0.68));
+        }
+
+        .galaxy-ufo::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            top: 11px;
+            width: 14px;
+            height: 10px;
+            transform: translateX(-50%);
+            background: radial-gradient(circle at 50% 0%, rgba(154, 226, 255, 0.42), rgba(154, 226, 255, 0));
+        }
+
+        .ufo-one {
+            top: 20%;
+            left: 18%;
+            animation: ufoDriftOne 8.5s ease-in-out infinite;
+        }
+
+        .ufo-two {
+            top: 62%;
+            right: 20%;
+            transform: scale(0.86);
+            animation: ufoDriftTwo 10.5s ease-in-out infinite;
+        }
+
+        .galaxy-delta {
+            width: 34px;
+            height: 26px;
+            clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+            background: linear-gradient(180deg, rgba(224, 246, 255, 0.9), rgba(96, 185, 228, 0.62));
+            box-shadow: inset 0 -2px 5px rgba(7, 40, 66, 0.4);
+        }
+
+        .galaxy-delta::before {
+            content: "";
+            position: absolute;
+            left: 50%;
+            bottom: -5px;
+            width: 10px;
+            height: 8px;
+            transform: translateX(-50%);
+            background: radial-gradient(circle at 50% 0%, rgba(163, 235, 255, 0.45), rgba(163, 235, 255, 0));
+        }
+
+        .delta-one {
+            top: 36%;
+            right: 38%;
+            animation: deltaCruise 9.2s ease-in-out infinite;
+        }
+
+        @keyframes ufoDriftOne {
+            0%, 100% { transform: translate3d(0, 0, 0) scale(1); opacity: 0.28; }
+            45% { transform: translate3d(16px, -10px, 0) scale(1.07); opacity: 0.52; }
+            70% { transform: translate3d(8px, -6px, 0) scale(1.02); opacity: 0.42; }
+        }
+
+        @keyframes ufoDriftTwo {
+            0%, 100% { transform: translate3d(0, 0, 0) scale(0.86); opacity: 0.24; }
+            50% { transform: translate3d(-18px, -12px, 0) scale(0.94); opacity: 0.5; }
+        }
+
+        @keyframes deltaCruise {
+            0%, 100% { transform: translate3d(0, 0, 0) rotate(-1deg); opacity: 0.24; }
+            50% { transform: translate3d(12px, -10px, 0) rotate(2deg); opacity: 0.47; }
+        }
+
+        @media (max-width: 900px) {
+            .galaxy-ufo { width: 30px; height: 12px; }
+            .galaxy-delta { width: 28px; height: 21px; }
+        }
     </style>
 </head>
 <body class="menu-page">
@@ -152,6 +258,12 @@
 
     <!-- Branch Selection Overlay (Home) -->
     <div id="branch-selector" class="branch-selector-overlay" style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; width: 100vw; position: fixed; top: 0; left: 0; z-index: 9999; background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('WhatsApp%20Image%202026-07-16%20at%2016.42.55.jpeg'); background-size: contain; background-position: left center; background-repeat: no-repeat; background-color: #000; overflow-y: auto; padding: 40px 20px; box-sizing: border-box;">
+
+        <div class="galaxy-craft-layer" aria-hidden="true">
+            <span class="galaxy-ufo ufo-one"></span>
+            <span class="galaxy-ufo ufo-two"></span>
+            <span class="galaxy-delta delta-one"></span>
+        </div>
 
         <div class="floating-3d-logo-wrap" aria-hidden="true">
             <div class="floating-3d-logo-aura"></div>
