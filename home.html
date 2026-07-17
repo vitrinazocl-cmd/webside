@@ -66,9 +66,9 @@
         }
 
         .entry-panel {
-            position: absolute;
-            right: 28px;
-            bottom: 28px;
+            position: fixed;
+            right: clamp(14px, 2.5vw, 34px);
+            bottom: clamp(14px, 2.8vh, 34px);
             width: 360px;
             padding: 22px;
             border-radius: 16px;
@@ -76,6 +76,7 @@
             border: 1px solid rgba(255,255,255,0.2);
             box-shadow: 0 14px 32px rgba(0,0,0,0.35);
             text-align: center;
+            z-index: 20;
         }
 
         .btn-enter-store {
