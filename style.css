@@ -143,6 +143,15 @@ body.menu-page .section-title {
     border-bottom-color: rgba(255, 255, 255, 0.85) !important;
 }
 
+/* Delay rendering of long below-the-fold sections until they approach the viewport */
+body.menu-page .products-section,
+body.menu-page .excel-section,
+body.menu-page .media-section,
+body.menu-page .news-section {
+    content-visibility: auto;
+    contain-intrinsic-size: 1200px;
+}
+
 /* Force gray text on the menu page to a bright white treatment */
 body.menu-page [style*="color: #333"],
 body.menu-page [style*="color:#333"],
