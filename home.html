@@ -31,27 +31,55 @@
         }
 
         .splash-container {
-            text-align: center;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             background-color: rgba(255, 255, 255, 0.05);
             padding: 50px;
             border-radius: 20px;
             backdrop-filter: blur(10px);
             box-shadow: 0 15px 35px rgba(0,0,0,0.2);
             border: 1px solid rgba(255,255,255,0.1);
-            max-width: 600px;
+            max-width: 980px;
             width: 90%;
+            min-height: 560px;
+        }
+
+        .splash-center {
+            width: 100%;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 20px;
         }
 
         .splash-logo {
-            max-width: 300px;
+            max-width: 420px;
             width: 100%;
             height: auto;
-            margin-bottom: 30px;
+            margin: 0;
             filter: drop-shadow(0px 10px 10px rgba(0,0,0,0.3));
         }
 
+        .entry-panel {
+            position: absolute;
+            right: 28px;
+            bottom: 28px;
+            width: 360px;
+            padding: 22px;
+            border-radius: 16px;
+            background: linear-gradient(145deg, rgba(0,0,0,0.35), rgba(0,0,0,0.22));
+            border: 1px solid rgba(255,255,255,0.2);
+            box-shadow: 0 14px 32px rgba(0,0,0,0.35);
+            text-align: center;
+        }
+
         .btn-enter-store {
-            display: inline-block;
+            display: block;
             background-color: var(--color-secondary);
             color: var(--color-white);
             padding: 15px 40px;
@@ -59,7 +87,7 @@
             font-weight: 800;
             border-radius: 50px;
             text-decoration: none;
-            margin-bottom: 40px;
+            margin-bottom: 18px;
             transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
             box-shadow: 0 5px 15px rgba(230, 0, 0, 0.4);
         }
@@ -72,7 +100,7 @@
         }
 
         .visitor-counter {
-            margin-bottom: 30px;
+            margin-bottom: 16px;
         }
 
         .visitor-counter p {
@@ -87,6 +115,7 @@
             display: flex;
             justify-content: center;
             gap: 5px;
+            flex-wrap: wrap;
         }
 
         .digit {
@@ -133,37 +162,69 @@
         .social-icon.ig:hover { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); }
         .social-icon.wa:hover { background-color: #25D366; }
         .social-icon.tt:hover { background-color: #000000; }
+
+        @media (max-width: 900px) {
+            .splash-container {
+                min-height: auto;
+                padding: 30px 20px;
+                flex-direction: column;
+                gap: 18px;
+            }
+
+            .splash-logo {
+                max-width: 300px;
+            }
+
+            .entry-panel {
+                position: static;
+                width: 100%;
+                max-width: 430px;
+                margin: 8px auto 0;
+            }
+
+            .social-icon {
+                width: 54px;
+                height: 54px;
+                font-size: 26px;
+            }
+
+            .digit {
+                font-size: 28px;
+                padding: 8px 12px;
+            }
+        }
     </style>
 </head>
 <body class="home-page-body">
 
     <div class="splash-container">
-        
-        <!-- Logo Grande -->
-        <!-- Usamos un placeholder atractivo en caso de no tener el logo.png en la carpeta -->
-        <img src="logo.png" alt="A&E Máxima Limpieza Logo" class="splash-logo" onerror="this.onerror=null; this.src='https://placehold.co/500x200/ffffff/0a2540?text=A%26E+M%C3%A1xima+Limpieza'">
-        
-        <br>
-
-        <!-- Botón para ir a la página de la tienda -->
-        <a href="index.html" class="btn-enter-store">
-            <i class="fa-solid fa-store"></i> Ingresar a la Tienda
-        </a>
-
-        <!-- Contador de Visitas -->
-        <div class="visitor-counter">
-            <p><i class="fa-solid fa-users"></i> Visitas Totales</p>
-            <div class="counter-digits" id="counterBox">
-                <!-- Se llenará con JavaScript -->
-            </div>
+        <div class="splash-center">
+            <!-- Logo Grande -->
+            <!-- Usamos un placeholder atractivo en caso de no tener el logo.png en la carpeta -->
+            <img src="logo.png" alt="A&E Máxima Limpieza Logo" class="splash-logo" onerror="this.onerror=null; this.src='https://placehold.co/500x200/ffffff/0a2540?text=A%26E+M%C3%A1xima+Limpieza'">
         </div>
 
-        <!-- Redes Sociales -->
-        <div class="social-links">
-            <a href="#" class="social-icon fb" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-            <a href="#" class="social-icon ig" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
-            <a href="#" class="social-icon wa" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
-            <a href="#" class="social-icon tt" title="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+        <div class="entry-panel">
+            <!-- Botón para ir a la página de la tienda -->
+            <a href="index.html" class="btn-enter-store">
+                <i class="fa-solid fa-store"></i> Ingresar a la Tienda
+            </a>
+
+            <!-- Contador de Visitas -->
+            <div class="visitor-counter">
+                <p><i class="fa-solid fa-users"></i> Visitas Totales</p>
+                <div class="counter-digits" id="counterBox">
+                    <!-- Se llenará con JavaScript -->
+                </div>
+            </div>
+
+            <!-- Redes Sociales -->
+            <div class="social-links">
+                <a href="#" class="social-icon fb" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="#" class="social-icon ig" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#" class="social-icon wa" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+                <a href="#" class="social-icon tt" title="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+            </div>
         </div>
 
     </div>
