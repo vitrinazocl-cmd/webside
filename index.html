@@ -125,7 +125,7 @@
     <header class="top-header">
         <div class="container header-container">
             <div class="logo" style="display: flex; align-items: center; gap: 15px;">
-                <img src="WhatsApp%20Image%202026-07-16%20at%2016.42.55.jpeg" alt="WEB PRO CHILE" style="max-height: 80px; transition: transform 0.3s; border-radius: 8px;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+                <img src="WhatsApp%20Image%202026-07-16%20at%2016.42.55.jpeg" alt="WEB PRO CHILE" style="max-height: 80px; width: auto; border-radius: 8px; transform-style: preserve-3d; animation: logoCoinSpin 1.6s linear infinite; will-change: transform; transform-origin: center center; filter: drop-shadow(0 10px 14px rgba(0, 0, 0, 0.45)) drop-shadow(0 0 10px rgba(0, 153, 255, 0.3));">
                 <span style="font-family: 'Roboto', sans-serif; font-weight: 900; font-size: 2.1rem; letter-spacing: 1px; text-shadow: -1px -1px 0 #333, 1px -1px 0 #333, -1px 1px 0 #333, 1px 1px 0 #333, 2px 2px 3px rgba(0,0,0,0.45);">
                     <span style="color: #ffffff;">WEB PRO </span>
                     <span style="color: #005cff;">C</span>
@@ -145,7 +145,7 @@
                 <div class="cart" id="cart-icon-btn" style="cursor: pointer;">
                     <i class="fa-solid fa-cart-shopping"></i>
                     <span class="cart-count" id="cart-count">0</span>
-                    <span>Carro Compras</span>
+                    <span style="color: #ffffff; font-weight: bold; text-shadow: 0 2px 8px rgba(0,0,0,0.9);">Carro Compras</span>
                 </div>
                 <a href="#" id="admin-login-btn" class="user-profile" title="Ver Pedidos Pendientes" style="color: var(--primary-color); text-decoration: none; display: flex; align-items: center; gap: 5px;">
                     <i class="fa-solid fa-clipboard-list"></i>
@@ -562,16 +562,16 @@
     <div id="comunidad-modal" class="cart-modal hidden" style="justify-content: center; align-items: center; z-index: 999999;">
         <div class="cart-content" style="height: 85vh; overflow-y: auto; border-radius: 8px; max-width: 650px; background: var(--dark-bg); border: 2px solid #0071ce; padding: 0;">
             <div class="cart-header" style="background: #0071ce; padding: 15px; position: sticky; top: 0; z-index: 10; display: flex; justify-content: space-between; align-items: center;">
-                <h2 style="color: white; margin: 0; font-size: 1.5rem;"><i class="fa-solid fa-users"></i> Comunidad A&E</h2>
+                <h2 style="color: white; margin: 0; font-size: 1.5rem;"><i class="fa-solid fa-users"></i> Comunidad Web Pro Chile</h2>
                 <button id="close-comunidad-btn" class="close-cart-btn" style="color: white;"><i class="fa-solid fa-xmark"></i></button>
             </div>
             
             <!-- Hero Image Comunidad -->
             <div style="width: 100%; height: 200px; overflow: hidden; position: relative;">
-                <img src="https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?q=80&w=800&auto=format&fit=crop" alt="Comunidad Limpieza" style="width: 100%; height: 100%; object-fit: cover;">
+                <img src="render-3d-fondo-tecnologia-moderna-diseno-plexo_1048-14928.avif" alt="Comunidad Web Pro Chile" style="width: 100%; height: 100%; object-fit: cover;">
                 <div style="position: absolute; bottom: 0; left: 0; width: 100%; padding: 20px; background: linear-gradient(transparent, rgba(0,0,0,0.9)); color: white;">
-                    <h3 style="margin: 0; font-size: 1.8rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.8);">¡Bienvenidos a la Familia!</h3>
-                    <p style="margin: 5px 0 0 0; color: #ffcc00; font-weight: bold;">La limpieza en su máxima expresión</p>
+                    <h3 style="margin: 0; font-size: 1.8rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.8);">¡Bienvenidos a la Comunidad!</h3>
+                    <p style="margin: 5px 0 0 0; color: #ffcc00; font-weight: bold;">Ideas, proyectos y soluciones digitales para crecer juntos</p>
                 </div>
             </div>
 
@@ -581,8 +581,8 @@
                 <div style="background: rgba(255,152,0,0.1); border: 1px solid #ff9800; border-radius: 8px; overflow: hidden; margin-bottom: 25px;">
                     <div style="padding: 20px;">
                         <h3 style="color: #ff9800; margin-bottom: 10px; font-size: 1.3rem;"><i class="fa-solid fa-trophy"></i> Sorteo Activo</h3>
-                        <h4 style="font-size: 1.2rem; margin-bottom: 5px;">¡Gana 1 mes de limpieza gratis! ✨</h4>
-                        <p style="margin-bottom: 10px; font-size: 0.95rem; color: #ddd; line-height: 1.5;">Por compras superiores a $50.000, participas automáticamente en nuestro gran sorteo.</p>
+                        <h4 style="font-size: 1.2rem; margin-bottom: 5px;">¡Gana una landing page profesional gratis! ✨</h4>
+                        <p style="margin-bottom: 10px; font-size: 0.95rem; color: #ddd; line-height: 1.5;">Por contratar cualquiera de nuestros servicios digitales, participas automáticamente en un sorteo mensual de una web informativa de una página.</p>
                         <p style="font-weight: bold; color: #ffcc00; font-size: 0.9rem;">Fecha del Sorteo: 30 de Agosto 2026</p>
                     </div>
                 </div>
@@ -591,9 +591,9 @@
                 <div style="background: rgba(231,76,60,0.1); border: 1px solid #e74c3c; border-radius: 8px; overflow: hidden; margin-bottom: 25px; display: flex; flex-direction: column;">
                     <div style="padding: 20px;">
                         <h3 style="color: #e74c3c; margin-bottom: 10px; font-size: 1.3rem;"><i class="fa-solid fa-tag"></i> Promo Flash Comunidad</h3>
-                        <h4 style="font-size: 1.2rem; margin-bottom: 5px;">40% DCTO. en Cloro y Desinfectantes</h4>
-                        <p style="margin-bottom: 10px; font-size: 0.95rem; color: #ddd; line-height: 1.5;">Muestra este código secreto en caja o menciónalo a nuestro vendedor de WhatsApp para aplicar tu descuento exclusivo.</p>
-                        <div style="background: #111; padding: 10px; text-align: center; border-radius: 4px; font-size: 1.5rem; letter-spacing: 5px; font-weight: 900; color: #e74c3c; margin-top: 10px;">ASEO40</div>
+                        <h4 style="font-size: 1.2rem; margin-bottom: 5px;">50% DCTO. en tu primera automatización web ✨</h4>
+                        <p style="margin-bottom: 10px; font-size: 0.95rem; color: #ddd; line-height: 1.5;">Menciona este código al pedir tu servicio digital y accede a una promoción especial en desarrollo web, soporte o integración de WhatsApp.</p>
+                        <div style="background: #111; padding: 10px; text-align: center; border-radius: 4px; font-size: 1.5rem; letter-spacing: 5px; font-weight: 900; color: #e74c3c; margin-top: 10px;">WEB50</div>
                     </div>
                 </div>
 
