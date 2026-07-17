@@ -66,9 +66,11 @@
         }
 
         .entry-panel {
-            position: fixed;
-            right: clamp(14px, 2.5vw, 34px);
-            bottom: clamp(14px, 2.8vh, 34px);
+            position: fixed !important;
+            right: clamp(14px, 2.5vw, 34px) !important;
+            top: clamp(14px, 2.8vh, 34px) !important;
+            bottom: auto !important;
+            left: auto !important;
             width: 360px;
             padding: 22px;
             border-radius: 16px;
@@ -177,9 +179,11 @@
             }
 
             .entry-panel {
-                position: fixed;
-                right: 12px;
-                bottom: 12px;
+                position: fixed !important;
+                right: 12px !important;
+                top: 12px !important;
+                bottom: auto !important;
+                left: auto !important;
                 width: min(92vw, 360px);
                 margin: 0;
                 padding: 16px;
