@@ -22,6 +22,108 @@ body {
     color: var(--text-dark);
 }
 
+body.menu-page {
+    --menu-page-bg-image: url('pngtree-cloud-server-and-computing-data-storage-and-processing-internet-and-technology-image_15739065.jpg');
+    --menu-tech-bg-image: url('pngtree-elegant-circuit-board-vector-background-a-technological-fusion-of-motherboard-and-image_13880777.png');
+    background-image:
+        linear-gradient(rgba(2, 8, 20, 0.58), rgba(2, 8, 20, 0.58)),
+        var(--menu-page-bg-image);
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+body.menu-page .top-header,
+body.menu-page .main-nav,
+body.menu-page .ad-box,
+body.menu-page .slider-section,
+body.menu-page .brands-section,
+body.menu-page .products-section,
+body.menu-page .excel-section,
+body.menu-page .media-section,
+body.menu-page .news-section,
+body.menu-page .main-footer,
+body.menu-page .entry-actions-panel,
+body.menu-page .product-card,
+body.menu-page .news-card,
+body.menu-page .cart-content {
+    background-image:
+        linear-gradient(rgba(3, 10, 24, 0.68), rgba(3, 10, 24, 0.68)),
+        var(--menu-tech-bg-image) !important;
+    background-size: cover !important;
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
+    border-color: rgba(121, 211, 255, 0.35) !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.32);
+}
+
+/* Improve readability for white text over textured backgrounds */
+body.menu-page [style*="color: white"],
+body.menu-page [style*="color:#fff"],
+body.menu-page [style*="color: #fff"],
+body.menu-page [style*="color:#ffffff"],
+body.menu-page [style*="color: #ffffff"],
+body.menu-page .entry-actions-panel,
+body.menu-page .slide-content,
+body.menu-page .brands-section,
+body.menu-page .main-footer {
+    text-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.9),
+        0 0 2px rgba(0, 0, 0, 0.7);
+    -webkit-text-stroke: 0.25px rgba(0, 0, 0, 0.55);
+}
+
+/* Extra emphasis for each project/page description in hero slides */
+body.menu-page .slide-content p,
+body.menu-page .slide-content h2,
+body.menu-page .slide-content h3,
+body.menu-page .slide-content span,
+body.menu-page .product-description {
+    text-shadow:
+        0 3px 12px rgba(0, 0, 0, 0.96),
+        0 1px 0 rgba(0, 0, 0, 0.85),
+        0 0 3px rgba(0, 0, 0, 0.7) !important;
+    -webkit-text-stroke: 0.35px rgba(0, 0, 0, 0.6);
+}
+
+body.menu-page .product-description {
+    color: #f4fbff !important;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.42), rgba(0, 0, 0, 0.28));
+    border: 1px solid rgba(146, 228, 255, 0.25);
+    border-radius: 8px;
+    padding: 8px 10px;
+    font-size: 13px !important;
+    line-height: 1.5 !important;
+}
+
+body.menu-page .product-title {
+    color: #ffffff !important;
+    font-size: 16px !important;
+}
+
+body.menu-page .brand-title {
+    color: #9fd9ff !important;
+    font-size: 12px !important;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9);
+}
+
+body.menu-page .main-footer,
+body.menu-page .main-footer h4,
+body.menu-page .main-footer p,
+body.menu-page .main-footer a,
+body.menu-page .main-footer li,
+body.menu-page .main-footer i,
+body.menu-page .footer-bottom,
+body.menu-page .footer-bottom p {
+    color: #ffffff !important;
+    text-shadow:
+        0 3px 10px rgba(0, 0, 0, 0.95),
+        0 1px 0 rgba(0, 0, 0, 0.85),
+        0 0 3px rgba(0, 0, 0, 0.75) !important;
+    -webkit-text-stroke: 0.3px rgba(0, 0, 0, 0.65);
+}
+
 a {
     text-decoration: none;
     color: inherit;
