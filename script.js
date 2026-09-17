@@ -216,12 +216,12 @@ document.addEventListener('DOMContentLoaded', () => {
         if(!sortSelect) return;
         const sortBy = sortSelect.value;
         if(sortBy === 'price-asc') {
-            currentProducts.sort((a, b) => a.price - b.price);
+            currentProducts.sort((a, b) => (a.price || 0) - (b.price || 0));
         } else if(sortBy === 'price-desc') {
-            currentProducts.sort((a, b) => b.price - a.price);
+            currentProducts.sort((a, b) => (b.price || 0) - (a.price || 0));
         } else {
-            // Default: ordenar por ID (relevancia original)
-            currentProducts.sort((a, b) => a.id - b.id);
+            // Default: preservar orden original del catálogo de 16 proyectos
+            currentProducts = [...baseCatalogo];
         }
     }
 
@@ -251,80 +251,51 @@ document.addEventListener('DOMContentLoaded', () => {
         productsToShow.forEach(prod => {
             if (!prod) return;
             const nameStr = prod.name || 'Sitio Web';
-            const imageStr = prod.image || 'nuevo%20catalogo/logo.jpg.jpeg';
+            const imageStr = prod.image || 'imagen1.png';
             const descStr = prod.description || 'Sitio web interactivo de alto impacto, diseñado con tecnología de vanguardia y adaptabilidad total para dispositivos móviles.';
             const linkStr = prod.link || '#';
+            const categoryStr = prod.category || 'PROYECTO';
 
             html += `
-            <div class="product-card falabella-style portfolio-card" data-id="${prod.id}" style="height: 440px; display: flex; flex-direction: column; border-radius: 8px; overflow: hidden; border: 1px solid #ddd; background: #fff; transition: transform 0.3s, box-shadow: 0 10px 20px rgba(0,0,0,0.15);">
-                <!-- Cabecera de Navegador Mock -->
-                <div class="browser-header" style="height: 25px; background: #e0e0e0; display: flex; align-items: center; padding: 0 10px; gap: 6px; border-bottom: 1px solid #ccc; flex-shrink: 0;">
-                    <span style="width: 8px; height: 8px; background: #ff5f56; border-radius: 50%;"></span>
-                    <span style="width: 8px; height: 8px; background: #ffbd2e; border-radius: 50%;"></span>
-                    <span style="width: 8px; height: 8px; background: #27c93f; border-radius: 50%;"></span>
-                    <div style="flex: 1; background: #fff; height: 16px; border-radius: 3px; font-size: 9px; color: #888; display: flex; align-items: center; padding-left: 5px; overflow: hidden; white-space: nowrap; margin-left: 10px; font-family: monospace;">
-                        ${linkStr}
+            <article class="mini-page-card" data-id="${prod.id}">
+                <div class="browser-header">
+                    <div class="browser-dots">
+                        <span class="browser-dot red"></span>
+                        <span class="browser-dot yellow"></span>
+                        <span class="browser-dot green"></span>
+                    </div>
+                    <div class="browser-url-bar">
+                        <i class="fa-solid fa-lock" style="color: #27c93f; font-size: 0.7rem;"></i>
+                        <span>${linkStr.replace(/\/$/, '')}</span>
                     </div>
                 </div>
-
-                <!-- Contenedor del Preview / Iframe -->
-                <div class="product-image-container" style="height: 180px; background-color: #f7f7f7; overflow: hidden; position: relative; flex-shrink: 0; cursor: pointer;">
-                    <img class="portfolio-img" src="${imageStr}" alt="${nameStr}" loading="lazy" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80';" style="width: 100%; height: 100%; object-fit: cover; transition: opacity 0.3s; display: block;">
-                    <iframe class="portfolio-iframe" data-src="${linkStr}" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" sandbox="allow-scripts allow-same-origin allow-forms allow-popups" style="display: none; width: 100%; height: 100%; border: none; position: absolute; top: 0; left: 0; z-index: 1;"></iframe>
+                <div class="mini-page-preview">
+                    <span class="badge-tag">${categoryStr}</span>
+                    <img src="${imageStr}" alt="${nameStr}" loading="lazy" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80';">
                 </div>
-
-                <!-- Info del Proyecto -->
-                <div class="product-info-container" style="display: flex; flex-direction: column; flex-grow: 1; padding: 15px; justify-content: space-between; height: calc(100% - 205px); box-sizing: border-box;">
-                    <div>
-                        <h4 class="brand-title" style="color: #0071ce; font-weight: 700; text-transform: uppercase; font-size: 11px; margin-bottom: 5px;">${prod.category || 'DISEÑO WEB'}</h4>
-                        <h3 class="product-title" style="font-size: 15px; font-weight: bold; margin-bottom: 8px; height: 38px; overflow: hidden; line-height: 1.3; color: #333;">${nameStr}</h3>
-                        <p class="product-description" style="font-size: 12px; color: #666; line-height: 1.4; margin-bottom: 12px; height: 50px; overflow: hidden;">${descStr}</p>
-                    </div>
-                    
-                    <!-- Botones de Acción -->
-                    <div style="display: flex; gap: 8px; margin-top: auto; padding: 0; border: none; background: transparent;">
-                        <button class="preview-btn" data-link="${linkStr}" data-name="${nameStr}" style="flex: 1; background: #333; color: white; border: none; border-radius: 4px; padding: 10px 5px; font-size: 12px; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 5px; transition: background 0.2s;">
+                <div class="mini-page-body">
+                    <h3 class="mini-page-title">${nameStr}</h3>
+                    <p class="mini-page-desc">${descStr}</p>
+                    <div class="mini-page-actions">
+                        <button class="btn-mini-preview preview-btn" data-link="${linkStr}" data-name="${nameStr}">
                             <i class="fa-solid fa-laptop-code"></i> Previsualizar
                         </button>
-                        <a href="${linkStr}" target="_blank" rel="noopener noreferrer" class="add-to-cart-btn fb-blue-btn" style="flex: 1; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 5px; font-weight: bold; text-align: center; border-radius: 4px; padding: 10px 5px; font-size: 12px; box-sizing: border-box; background-color: #0071ce;">
-                            <i class="fa-solid fa-arrow-up-right-from-square"></i> Visitar
+                        <a href="${linkStr}" target="_blank" rel="noopener noreferrer" class="btn-mini-visit">
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i> Visitar Sitio
                         </a>
                     </div>
                 </div>
-            </div>`;
+            </article>`;
         });
             productsGrid.innerHTML = html;
 
-            // 1. Activar precarga e interacción de Iframe al pasar el cursor (Hover)
-            document.querySelectorAll('.portfolio-card').forEach(card => {
-                const img = card.querySelector('.portfolio-img');
-                const iframe = card.querySelector('.portfolio-iframe');
-                
-                card.addEventListener('mouseenter', () => {
-                    if (iframe) {
-                        if (!iframe.src || iframe.src === 'about:blank' || iframe.src === window.location.href) {
-                            iframe.src = iframe.getAttribute('data-src');
-                        }
-                        iframe.style.display = 'block';
-                        if (img) img.style.opacity = '0';
-                    }
-                });
-                
-                card.addEventListener('mouseleave', () => {
-                    if (iframe) {
-                        iframe.style.display = 'none';
-                        if (img) img.style.opacity = '1';
-                    }
-                });
-            });
-
-            // 2. Eventos para abrir el Modal de Vista Previa Responsiva
+            // Eventos para abrir el Modal de Vista Previa Responsiva
             const previewModal = document.getElementById('live-preview-modal');
             const previewIframe = document.getElementById('preview-iframe');
             const previewTitle = document.getElementById('preview-site-title');
             const previewVisitLink = document.getElementById('preview-visit-link');
 
-            document.querySelectorAll('.preview-btn').forEach(btn => {
+            productsGrid.querySelectorAll('.preview-btn').forEach(btn => {
                 btn.addEventListener('click', (e) => {
                     e.preventDefault();
                     const link = btn.getAttribute('data-link');
@@ -335,7 +306,6 @@ document.addEventListener('DOMContentLoaded', () => {
                         previewVisitLink.href = link;
                         previewIframe.src = link;
                         
-                        // Mostrar modal con display flex
                         previewModal.classList.remove('hidden');
                         previewModal.style.display = 'flex';
                     }
@@ -1037,31 +1007,6 @@ function initVisitorCounter() {
 
     // Mostrar el número inmediatamente (renderizado instantáneo sin demoras)
     renderCount(currentVisits);
-
-    // Intentar sincronización opcional con API externa con failover 100% silencioso
-    try {
-        const controller = typeof AbortController !== 'undefined' ? new AbortController() : null;
-        const timeoutId = controller ? setTimeout(() => controller.abort(), 2500) : null;
-
-        fetch('https://api.counterapi.dev/v1/distribuidora_ae_limpieza_2026/visits/up', { 
-            signal: controller ? controller.signal : undefined 
-        })
-        .then(res => res && res.ok ? res.json() : null)
-        .then(data => {
-            if (timeoutId) clearTimeout(timeoutId);
-            if (data && typeof data.count === 'number' && !isNaN(data.count) && data.count > 0) {
-                const remoteTotal = data.count + BASE_MIN_VISITS;
-                const finalTotal = Math.max(currentVisits, remoteTotal);
-                persistVisits(finalTotal);
-                renderCount(finalTotal);
-            }
-        })
-        .catch(() => {
-            if (timeoutId) clearTimeout(timeoutId);
-        });
-    } catch (e) {
-        // Ignorar cualquier fallo de red de forma transparente
-    }
 }
 
 document.addEventListener('DOMContentLoaded', initVisitorCounter);

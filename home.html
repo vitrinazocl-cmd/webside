@@ -338,28 +338,6 @@
             }
 
             renderCount(currentVisits);
-
-            try {
-                const controller = typeof AbortController !== 'undefined' ? new AbortController() : null;
-                const timeoutId = controller ? setTimeout(() => controller.abort(), 2500) : null;
-
-                fetch('https://api.counterapi.dev/v1/distribuidora_ae_limpieza_2026/visits/up', { 
-                    signal: controller ? controller.signal : undefined 
-                })
-                .then(res => res && res.ok ? res.json() : null)
-                .then(data => {
-                    if (timeoutId) clearTimeout(timeoutId);
-                    if (data && typeof data.count === 'number' && !isNaN(data.count) && data.count > 0) {
-                        const remoteTotal = data.count + BASE_MIN_VISITS;
-                        const finalTotal = Math.max(currentVisits, remoteTotal);
-                        persistVisits(finalTotal);
-                        renderCount(finalTotal);
-                    }
-                })
-                .catch(() => {
-                    if (timeoutId) clearTimeout(timeoutId);
-                });
-            } catch (e) {}
         }
 
         document.addEventListener('DOMContentLoaded', initVisitorCounter);
