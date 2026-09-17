@@ -926,44 +926,145 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// --- Funcionalidad del Contador de Visitas Global ---
-document.addEventListener('DOMContentLoaded', () => {
-    const counterDiv = document.getElementById('visitor-flip-counter');
-    if (!counterDiv) return;
+// --- Funcionalidad del Contador de Visitas Global e Ininterrumpido ---
+function initVisitorCounter() {
+    const flipCounter = document.getElementById('visitor-flip-counter');
+    const boxCounter = document.getElementById('counterBox');
 
-    function renderCounter(num) {
-        // Asegurar que tenga al menos 4 dígitos (rellenando con 0 a la izquierda)
-        const visitString = num.toString().padStart(4, '0');
-        counterDiv.innerHTML = ''; // Limpiar
-        
-        // Inyectar cada dígito en el estilo flip
-        visitString.split('').forEach(digit => {
-            const digitSpan = document.createElement('span');
-            digitSpan.className = 'flip-digit';
-            digitSpan.textContent = digit;
-            counterDiv.appendChild(digitSpan);
-        });
+    // Si no existe ningún contenedor de visitas en la página, no se ejecuta
+    if (!flipCounter && !boxCounter) return;
+
+    const BASE_MIN_VISITS = 14258;
+    const STORAGE_KEYS = [
+        'webprochile_visits_master',
+        'ae_visits',
+        'site_total_visits_fallback_v2'
+    ];
+    const COOKIE_NAME = 'webprochile_visits_master';
+
+    // Leer cookie de forma segura
+    function getCookie(name) {
+        try {
+            const value = `; ${document.cookie}`;
+            const parts = value.split(`; ${name}=`);
+            if (parts.length === 2) return parts.pop().split(';').shift();
+        } catch (e) {}
+        return null;
     }
 
-    // Usamos una API gratuita para llevar el conteo real global
-    // Namespace: distribuidora_ae_limpieza_2026
-    fetch('https://api.counterapi.dev/v1/distribuidora_ae_limpieza_2026/visits/up')
-        .then(response => response.json())
-        .then(data => {
-            // data.count nos da el número real de visitas desde que se creó el contador
-            // Queremos que empiece en 2333, así que le sumamos una base (ej. 2332)
-            const totalVisits = data.count + 2332;
-            renderCounter(totalVisits);
-        })
-        .catch(error => {
-            // Si la API falla, usamos localStorage como respaldo temporal
-            console.error('Error cargando el contador:', error);
-            let fallback = parseInt(localStorage.getItem('site_total_visits_fallback_v2')) || 2332;
-            fallback = fallback + 1;
-            localStorage.setItem('site_total_visits_fallback_v2', fallback);
-            renderCounter(fallback);
+    // Escribir cookie persistente (10 años)
+    function setCookie(name, value) {
+        try {
+            const expires = new Date(Date.now() + 10 * 365 * 24 * 60 * 60 * 1000).toUTCString();
+            document.cookie = `${name}=${encodeURIComponent(value)}; expires=${expires}; path=/; SameSite=Lax`;
+        } catch (e) {}
+    }
+
+    // Obtener la cifra más alta guardada localmente (Garantía Monotónica: jamás se reinicia ni baja)
+    function getStoredVisits() {
+        let maxVisits = BASE_MIN_VISITS;
+
+        STORAGE_KEYS.forEach(key => {
+            try {
+                const val = parseInt(localStorage.getItem(key), 10);
+                if (!isNaN(val) && val > maxVisits) maxVisits = val;
+            } catch (e) {}
         });
-});
+
+        const cookieVal = parseInt(getCookie(COOKIE_NAME), 10);
+        if (!isNaN(cookieVal) && cookieVal > maxVisits) maxVisits = cookieVal;
+
+        try {
+            const sessionVal = parseInt(sessionStorage.getItem('webprochile_visits_master'), 10);
+            if (!isNaN(sessionVal) && sessionVal > maxVisits) maxVisits = sessionVal;
+        } catch (e) {}
+
+        return maxVisits;
+    }
+
+    // Guardar en todas las capas de almacenamiento local
+    function persistVisits(num) {
+        if (typeof num !== 'number' || isNaN(num) || num < BASE_MIN_VISITS) return;
+
+        STORAGE_KEYS.forEach(key => {
+            try { localStorage.setItem(key, num.toString()); } catch (e) {}
+        });
+        try { sessionStorage.setItem('webprochile_visits_master', num.toString()); } catch (e) {}
+        setCookie(COOKIE_NAME, num.toString());
+    }
+
+    // Renderizar dígitos en la UI de forma segura
+    function renderCount(num) {
+        const safeNum = Math.max(BASE_MIN_VISITS, parseInt(num, 10) || BASE_MIN_VISITS);
+        const visitString = safeNum.toString().padStart(6, '0');
+
+        // 1. Render para index.html (#visitor-flip-counter)
+        if (flipCounter) {
+            flipCounter.innerHTML = '';
+            visitString.split('').forEach(digit => {
+                const digitSpan = document.createElement('span');
+                digitSpan.className = 'flip-digit';
+                digitSpan.textContent = digit;
+                flipCounter.appendChild(digitSpan);
+            });
+        }
+
+        // 2. Render para home.html (#counterBox)
+        if (boxCounter) {
+            boxCounter.innerHTML = '';
+            visitString.split('').forEach(digit => {
+                const digitSpan = document.createElement('span');
+                digitSpan.className = 'digit';
+                digitSpan.textContent = digit;
+                boxCounter.appendChild(digitSpan);
+            });
+        }
+    }
+
+    // Determinar la cuenta actual e incrementar en nueva sesión
+    let currentVisits = getStoredVisits();
+
+    try {
+        if (!sessionStorage.getItem('webprochile_session_counted')) {
+            currentVisits += 1;
+            sessionStorage.setItem('webprochile_session_counted', 'true');
+            persistVisits(currentVisits);
+        }
+    } catch (e) {
+        currentVisits += 1;
+        persistVisits(currentVisits);
+    }
+
+    // Mostrar el número inmediatamente (renderizado instantáneo sin demoras)
+    renderCount(currentVisits);
+
+    // Intentar sincronización opcional con API externa con failover 100% silencioso
+    try {
+        const controller = typeof AbortController !== 'undefined' ? new AbortController() : null;
+        const timeoutId = controller ? setTimeout(() => controller.abort(), 2500) : null;
+
+        fetch('https://api.counterapi.dev/v1/distribuidora_ae_limpieza_2026/visits/up', { 
+            signal: controller ? controller.signal : undefined 
+        })
+        .then(res => res && res.ok ? res.json() : null)
+        .then(data => {
+            if (timeoutId) clearTimeout(timeoutId);
+            if (data && typeof data.count === 'number' && !isNaN(data.count) && data.count > 0) {
+                const remoteTotal = data.count + BASE_MIN_VISITS;
+                const finalTotal = Math.max(currentVisits, remoteTotal);
+                persistVisits(finalTotal);
+                renderCount(finalTotal);
+            }
+        })
+        .catch(() => {
+            if (timeoutId) clearTimeout(timeoutId);
+        });
+    } catch (e) {
+        // Ignorar cualquier fallo de red de forma transparente
+    }
+}
+
+document.addEventListener('DOMContentLoaded', initVisitorCounter);
 
 // --- Reproductor de Audio ---
 document.addEventListener('DOMContentLoaded', () => {
@@ -1130,12 +1231,13 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Eventos para abrir el Modal de Vista Previa desde el Slider (botones estáticos)
+    // Eventos para abrir el Modal de Vista Previa (compatible con Slider y Cuadros de Mini Páginas)
     const previewTitle = document.getElementById('preview-site-title');
     const previewVisitLink = document.getElementById('preview-visit-link');
 
-    document.querySelectorAll('.slide-preview-btn').forEach(btn => {
-        btn.addEventListener('click', (e) => {
+    document.addEventListener('click', (e) => {
+        const btn = e.target.closest('.slide-preview-btn, .btn-mini-preview');
+        if (btn) {
             e.preventDefault();
             const link = btn.getAttribute('data-link');
             const name = btn.getAttribute('data-name');
@@ -1148,7 +1250,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 previewModal.classList.remove('hidden');
                 previewModal.style.display = 'flex';
             }
-        });
+        }
     });
 
     // Toggle de resoluciones

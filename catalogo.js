@@ -70,6 +70,70 @@ const catalogoProductos = [
         "image": "imagen8.jpeg",
         "link": "https://celularespk.netlify.app/",
         "description": "Catálogo online de smartphones y gadgets tecnológicos con cotizador interactivo y derivación a ventas."
+    },
+    {
+        "id": "site_ahorraya",
+        "name": "AhorraYa - Supermercado Online",
+        "category": "PROMOCIONES",
+        "image": "ahorraya_banner.jpg",
+        "link": "https://www.superahorraya.cl/",
+        "description": "Plataforma e-commerce masiva de supermercado, productos de limpieza y ofertas en superahorraya.cl."
+    },
+    {
+        "id": "site_redhat",
+        "name": "RedHat Linux Cloud System",
+        "category": "SERVICIOS",
+        "image": "fondo-tecnologia-circuito-placa-base-azul-degradado_53876-124654.avif",
+        "link": "https://redhat-eva3.netlify.app/",
+        "description": "Plataforma de administración de infraestructura cloud y gestión de servidores Enterprise RedHat."
+    },
+    {
+        "id": "site_soft_eleodoro",
+        "name": "Eleodoro El Grande Distribuidora - ERP & POS",
+        "category": "SERVICIOS",
+        "image": "imagen2.jpeg",
+        "link": "https://cajaeleodoro-1.onrender.com/",
+        "description": "Sistema de gestión comercial, control de pedidos, arqueo de caja, stock y ventas ERP & POS."
+    },
+    {
+        "id": "site_superahorropremiun",
+        "name": "Super Ahorro Premiun - 02-A Facundo Minimarket",
+        "category": "PROMOCIONES",
+        "image": "imagenn1.jpeg",
+        "link": "https://superahorropremiun.netlify.app/",
+        "description": "Plataforma e-commerce y minimarket online para compras rápidas, ofertas masivas y pedidos a domicilio."
+    },
+    {
+        "id": "site_batallasdeaura",
+        "name": "Batallas de Aura - Red Social de Pelea Digital 15s (Chile)",
+        "category": "PROMOCIONES",
+        "image": "imagenn2.jpeg",
+        "link": "https://batallasdeaura.cl/",
+        "description": "Red social interactiva de peleas digitales de 15 segundos, duelos en línea y comunidad gaming chilena."
+    },
+    {
+        "id": "site_custodiaapp",
+        "name": "App Equipaje - Control de Custodia y Caja",
+        "category": "SERVICIOS",
+        "image": "imagen5.jpeg",
+        "link": "https://custodiaapp.netlify.app/",
+        "description": "Sistema de gestión y control de custodia de equipajes, arqueo de caja y tickets de almacenamiento."
+    },
+    {
+        "id": "site_appcasino",
+        "name": "CasinoLab | Ticket de Alimentacion",
+        "category": "SERVICIOS",
+        "image": "imagen4.jpeg",
+        "link": "https://appcasino.netlify.app/",
+        "description": "Sistema corporativo para emisión y validación de tickets de alimentación y vales digitales de casino."
+    },
+    {
+        "id": "site_megasuper",
+        "name": "minimercado.cl - El Marketplace Inteligente de Chile (4 Tiendas en 1)",
+        "category": "PROMOCIONES",
+        "image": "ahorraya_banner.jpg",
+        "link": "https://www.megasuper.cl/",
+        "description": "Plataforma e-commerce multitienda de ventas inteligentes y logística unificada en megasuper.cl."
     }
 ];
 
