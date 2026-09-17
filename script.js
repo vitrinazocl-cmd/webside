@@ -901,7 +901,6 @@ function initVisitorCounter() {
     const flipCounter = document.getElementById('visitor-flip-counter');
     const boxCounter = document.getElementById('counterBox');
 
-    // Si no existe ningún contenedor de visitas en la página, no se ejecuta
     if (!flipCounter && !boxCounter) return;
 
     const BASE_MIN_VISITS = 14258;
@@ -912,17 +911,18 @@ function initVisitorCounter() {
     ];
     const COOKIE_NAME = 'webprochile_visits_master';
 
-    // Leer cookie de forma segura
     function getCookie(name) {
         try {
             const value = `; ${document.cookie}`;
             const parts = value.split(`; ${name}=`);
-            if (parts.length === 2) return parts.pop().split(';').shift();
+            if (parts.length === 2) {
+                const raw = parts.pop().split(';').shift();
+                return decodeURIComponent(raw);
+            }
         } catch (e) {}
         return null;
     }
 
-    // Escribir cookie persistente (10 años)
     function setCookie(name, value) {
         try {
             const expires = new Date(Date.now() + 10 * 365 * 24 * 60 * 60 * 1000).toUTCString();
@@ -930,45 +930,60 @@ function initVisitorCounter() {
         } catch (e) {}
     }
 
-    // Obtener la cifra más alta guardada localmente (Garantía Monotónica: jamás se reinicia ni baja)
     function getStoredVisits() {
         let maxVisits = BASE_MIN_VISITS;
 
         STORAGE_KEYS.forEach(key => {
             try {
-                const val = parseInt(localStorage.getItem(key), 10);
-                if (!isNaN(val) && val > maxVisits) maxVisits = val;
+                const raw = localStorage.getItem(key);
+                if (raw === 'NaN' || raw === 'undefined' || raw === 'null') {
+                    localStorage.removeItem(key);
+                } else if (raw) {
+                    const val = parseInt(raw, 10);
+                    if (!isNaN(val) && val > maxVisits) maxVisits = val;
+                }
             } catch (e) {}
         });
 
-        const cookieVal = parseInt(getCookie(COOKIE_NAME), 10);
-        if (!isNaN(cookieVal) && cookieVal > maxVisits) maxVisits = cookieVal;
+        try {
+            const cookieRaw = getCookie(COOKIE_NAME);
+            if (cookieRaw === 'NaN' || cookieRaw === 'undefined' || cookieRaw === 'null') {
+                setCookie(COOKIE_NAME, BASE_MIN_VISITS.toString());
+            } else if (cookieRaw) {
+                const cookieVal = parseInt(cookieRaw, 10);
+                if (!isNaN(cookieVal) && cookieVal > maxVisits) maxVisits = cookieVal;
+            }
+        } catch (e) {}
 
         try {
-            const sessionVal = parseInt(sessionStorage.getItem('webprochile_visits_master'), 10);
-            if (!isNaN(sessionVal) && sessionVal > maxVisits) maxVisits = sessionVal;
+            const sessionRaw = sessionStorage.getItem('webprochile_visits_master');
+            if (sessionRaw === 'NaN' || sessionRaw === 'undefined' || sessionRaw === 'null') {
+                sessionStorage.removeItem('webprochile_visits_master');
+            } else if (sessionRaw) {
+                const sessionVal = parseInt(sessionRaw, 10);
+                if (!isNaN(sessionVal) && sessionVal > maxVisits) maxVisits = sessionVal;
+            }
         } catch (e) {}
 
         return maxVisits;
     }
 
-    // Guardar en todas las capas de almacenamiento local
     function persistVisits(num) {
-        if (typeof num !== 'number' || isNaN(num) || num < BASE_MIN_VISITS) return;
-
+        const safe = (typeof num === 'number' && !isNaN(num) && num >= BASE_MIN_VISITS) ? Math.floor(num) : BASE_MIN_VISITS;
         STORAGE_KEYS.forEach(key => {
-            try { localStorage.setItem(key, num.toString()); } catch (e) {}
+            try { localStorage.setItem(key, safe.toString()); } catch (e) {}
         });
-        try { sessionStorage.setItem('webprochile_visits_master', num.toString()); } catch (e) {}
-        setCookie(COOKIE_NAME, num.toString());
+        try { sessionStorage.setItem('webprochile_visits_master', safe.toString()); } catch (e) {}
+        setCookie(COOKIE_NAME, safe.toString());
     }
 
-    // Renderizar dígitos en la UI de forma segura
     function renderCount(num) {
-        const safeNum = Math.max(BASE_MIN_VISITS, parseInt(num, 10) || BASE_MIN_VISITS);
+        let safeNum = parseInt(num, 10);
+        if (isNaN(safeNum) || safeNum < BASE_MIN_VISITS) {
+            safeNum = BASE_MIN_VISITS;
+        }
         const visitString = safeNum.toString().padStart(6, '0');
 
-        // 1. Render para index.html (#visitor-flip-counter)
         if (flipCounter) {
             flipCounter.innerHTML = '';
             visitString.split('').forEach(digit => {
@@ -979,7 +994,6 @@ function initVisitorCounter() {
             });
         }
 
-        // 2. Render para home.html (#counterBox)
         if (boxCounter) {
             boxCounter.innerHTML = '';
             visitString.split('').forEach(digit => {
@@ -991,21 +1005,18 @@ function initVisitorCounter() {
         }
     }
 
-    // Determinar la cuenta actual e incrementar en nueva sesión
     let currentVisits = getStoredVisits();
 
     try {
         if (!sessionStorage.getItem('webprochile_session_counted')) {
             currentVisits += 1;
             sessionStorage.setItem('webprochile_session_counted', 'true');
-            persistVisits(currentVisits);
         }
     } catch (e) {
         currentVisits += 1;
-        persistVisits(currentVisits);
     }
 
-    // Mostrar el número inmediatamente (renderizado instantáneo sin demoras)
+    persistVisits(currentVisits);
     renderCount(currentVisits);
 }
 
